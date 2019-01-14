@@ -45,8 +45,16 @@
 
             <div class="form-group">
                 <label for="comment">Comment:</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <textarea class="form-control" rows="15" id="comment"></textarea>
+
+            </div>
+
+            <div class="form-group">
                 <a id="myCompile" class="btn btn-primary" href="#" role="button">Run</a>
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" rows="3" id="compileResult"></textarea>
             </div>
         </div>
     </div>
@@ -80,7 +88,8 @@
 
         $.post( "/compileAndRun/", JSON.stringify({"script":$("#comment").val()}))
             .done(function( data ) {
-                alert( "Script Loaded: " + data );
+                //alert( "Script Loaded: " + data );
+                $('#compileResult').text(data);
             }, "json");
 
 /*
