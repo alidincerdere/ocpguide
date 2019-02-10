@@ -15,4 +15,10 @@ public class WelcomeController {
 
         return "welcome";
     }
+
+    @RequestMapping(value = "/chapterOne", method = RequestMethod.GET)
+    public String deneme(Model model) {
+
+        return "deneme";
+    }
 }

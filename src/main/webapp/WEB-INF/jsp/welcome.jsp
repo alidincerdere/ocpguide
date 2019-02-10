@@ -1,34 +1,80 @@
 <%@ include file="common/header.jspf"%>
-<div id="wrapper">
+
+<div id="wrapper" class="toggled">
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
-                    Start Bootstrap
+                    OCP Preparation Guide
                 </a>
             </li>
+
+            <li data-toggle="collapse" data-target="#chapterSub"  class="collapsed active">
+                <div class="row">
+                    <a href="#">
+                        <a href="/chapterOne" id="chapter1" >Chapter 1: Advanced Class Design</a>
+                        <i class="fas fa-angle-down" style="color: white"></i>
+                    </a>
+                </div>
+
+
+
+            </li>
+            <ul class="sub-menu collapse" id="chapterSub">
+                <li class="active"><a href="#">Subchapter</a></li>
+            </ul>
+
+
+            <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                <div class="row">
+
+                    <a href="#">
+
+                        <a href="chapterOne"> Chapter 2: Design Pattrens and Principles <span class="arrow" style="color: white"></span></a>
+                        <i class="fas fa-angle-down" style="color: white; "></i>
+
+                    </a>
+
+                </div>
+
+            </li>
+            <ul class="sub-menu collapse" id="products">
+                <li class="active"><a href="#">CSS3 Animation</a></li>
+                <li><a href="#">General</a></li>
+                <li><a href="#">Buttons</a></li>
+                <li><a href="#">Tabs & Accordions</a></li>
+                <li><a href="#">Typography</a></li>
+                <li><a href="#">FontAwesome</a></li>
+                <li><a href="#">Slider</a></li>
+                <li><a href="#">Panels</a></li>
+                <li><a href="#">Widgets</a></li>
+                <li><a href="#">Bootstrap Model</a></li>
+            </ul>
             <li>
-                <a href="#">Dashboard</a>
+                <a href="#">Chapter 3: Generics and Collections</a>
             </li>
             <li>
-                <a href="#">Shortcuts</a>
+                <a href="#">Chapter 4: Functional Programming</a>
             </li>
             <li>
-                <a href="#">Overview</a>
+                <a href="#">Chapter 5: Dates, String and Localization</a>
             </li>
             <li>
-                <a href="#">Events</a>
+                <a href="#">Chapter 6: Exceptions and Assertions</a>
             </li>
             <li>
-                <a href="#">About</a>
+                <a href="#">Chapter 7: Concurrency</a>
             </li>
             <li>
-                <a href="#">Services</a>
+                <a href="#">Chapter 8: IO</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="#">Chapter 9: NIO.2</a>
+            </li>
+            <li>
+                <a href="#">Chapter 10: JDBC</a>
             </li>
         </ul>
     </div>
