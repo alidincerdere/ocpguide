@@ -11,121 +11,62 @@
                 </a>
             </li>
 
-
-
-            <c:forEach begin="0" end="${chapterList.size()-1}" varStatus="loop">
+            <c:forEach begin="0" end="${chapterList.size()-1}" varStatus="loop" var="outerCount">
 
                 <c:if test = "${chapterList.get(loop.index).level == 1}">
                     <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(loop.index).id}"  class="collapsed active">
                         <div class="row">
                             <a href="#">
-                                <a href="/${chapterList.get(loop.index).url}" id="${chapterList.get(loop.index).id}" >${chapterList.get(loop.index).name}</a>
+                                <a href="/${chapterList.get(loop.index).url}" id="${chapterList.get(loop.index).id}">${chapterList.get(loop.index).chapterNum}  ${chapterList.get(loop.index).name}</a>
                                 <i class="fas fa-angle-down" style="color: white"></i>
                             </a>
                         </div>
                     </li>
 
-                    <c:if test = "${chapterList.get(loop.index + 1).level == 2}">
+                    <c:if test = "${chapterList.get(loop.index + 1).parentChapter == chapterList.get(loop.index).id}">
 
                         <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
 
-                            <c:forEach begin="${loop.index + 1}" end="${chapterList.size()-1}" varStatus="innerloop">
-
-                                <c:if test = "${chapterList.get(innerloop.index).level == 2}">
-
-                                    <li><a href="/${chapterList.get(innerloop.index).url}">${chapterList.get(innerloop.index).name}</a></li>
+                            <c:forEach begin="${loop.index + 1}" end="${chapterList.size()-1}"  var="innerCount">
 
 
+                                <c:if test="${chapterList.get(innerCount).parentChapter == chapterList.get(loop.index).id}">
+                                    <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(innerCount).id}"  class="collapsed active">
+                                        <div class="row">
+                                            <a href="#">
+                                                <a href="/${chapterList.get(innerCount).url}">${chapterList.get(innerCount).chapterNum}  ${chapterList.get(innerCount).name}</a>
+                                                <i class="fas fa-angle-down" style="color: white"></i>
+                                            </a>
+                                        </div>
+                                    </li>
 
+                                    <c:if test="${innerCount + 1<=chapterList.size()-1}">
+
+                                        <c:if test="${chapterList.get(innerCount + 1).parentChapter == chapterList.get(innerCount).id}">
+                                            <ul class="sub-menu collapse" id="chapterSub${chapterList.get(innerCount).id}">
+
+                                                <c:forEach begin="${innerCount + 1}" end="${chapterList.size()-1}"  var="inner3Count">
+
+                                                    <c:if test="${chapterList.get(inner3Count).parentChapter == chapterList.get(innerCount).id}">
+                                                        <li><a href="/${chapterList.get(inner3Count).url}">${chapterList.get(inner3Count).chapterNum}  ${chapterList.get(inner3Count).name}</a></li>
+                                                    </c:if>
+
+                                                </c:forEach>
+
+                                            </ul>
+
+                                        </c:if>
+                                    </c:if>
                                 </c:if>
-
-
 
                             </c:forEach>
 
                         </ul>
                     </c:if>
 
-
-
-
-
                  </c:if>
 
-
-
-                <c:if test = "${chapter.level == 3}">
-
-                </c:if>
-
-
-
             </c:forEach>
-
-
-
-            <li data-toggle="collapse" data-target="#chapterSub"  class="collapsed active">
-                <div class="row">
-                    <a href="#">
-                        <a href="/chapterOne" id="chapter1" >Chapter 1: Advanced Class Design</a>
-                        <i class="fas fa-angle-down" style="color: white"></i>
-                    </a>
-                </div>
-            </li>
-            <ul class="sub-menu collapse" id="chapterSub">
-                <li class="active"><a href="#">Subchapter</a></li>
-            </ul>
-
-
-            <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                <div class="row">
-
-                    <a href="#">
-
-                        <a href="chapterOne"> Chapter 2: Design Pattrens and Principles <span class="arrow" style="color: white"></span></a>
-                        <i class="fas fa-angle-down" style="color: white; "></i>
-
-                    </a>
-
-                </div>
-
-            </li>
-            <ul class="sub-menu collapse" id="products">
-                <li class="active"><a href="#">CSS3 Animation</a></li>
-                <li><a href="#">General</a></li>
-                <li><a href="#">Buttons</a></li>
-                <li><a href="#">Tabs & Accordions</a></li>
-                <li><a href="#">Typography</a></li>
-                <li><a href="#">FontAwesome</a></li>
-                <li><a href="#">Slider</a></li>
-                <li><a href="#">Panels</a></li>
-                <li><a href="#">Widgets</a></li>
-                <li><a href="#">Bootstrap Model</a></li>
-            </ul>
-            <li>
-                <a href="#">Chapter 3: Generics and Collections</a>
-            </li>
-            <li>
-                <a href="#">Chapter 4: Functional Programming</a>
-            </li>
-            <li>
-                <a href="#">Chapter 5: Dates, String and Localization</a>
-            </li>
-            <li>
-                <a href="#">Chapter 6: Exceptions and Assertions</a>
-            </li>
-            <li>
-                <a href="#">Chapter 7: Concurrency</a>
-            </li>
-            <li>
-                <a href="#">Chapter 8: IO</a>
-            </li>
-            <li>
-                <a href="#">Chapter 9: NIO.2</a>
-            </li>
-            <li>
-                <a href="#">Chapter 10: JDBC</a>
-            </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
