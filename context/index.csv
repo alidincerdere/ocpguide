@@ -9,7 +9,7 @@ Chapter; Name
 1.4.3; hashCode
 1.5; Working with Enums
 1.5.1; Using Enums in Switch Statements
-1.5.2; Adding Constructors, Fields, and Metods
+1.5.2; Adding Constructors, Fields, and Methods
 1.6; Creating Nested Classes
 1.6.1; Member Inner Classes
 1.6.2; Local Inner Classes
@@ -26,7 +26,7 @@ Chapter; Name
 2.2.2; Implementing Functional Interfaces with Lambdas
 2.2.3; Applying the Predicate Interface
 2.3; Implementing Polymorphism
-2.3.1; Distinguishing between an OBject and a Reference
+2.3.1; Distinguishing between an Object and a Reference
 2.3.2; Casting Object References
 2.4; Understanding Design Principles
 2.4.1; Encapsulating Data

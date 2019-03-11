@@ -11,6 +11,59 @@
                 </a>
             </li>
 
+
+
+            <c:forEach begin="0" end="${chapterList.size()-1}" varStatus="loop">
+
+                <c:if test = "${chapterList.get(loop.index).level == 1}">
+                    <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(loop.index).id}"  class="collapsed active">
+                        <div class="row">
+                            <a href="#">
+                                <a href="/${chapterList.get(loop.index).url}" id="${chapterList.get(loop.index).id}" >${chapterList.get(loop.index).name}</a>
+                                <i class="fas fa-angle-down" style="color: white"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                    <c:if test = "${chapterList.get(loop.index + 1).level == 2}">
+
+                        <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
+
+                            <c:forEach begin="${loop.index + 1}" end="${chapterList.size()-1}" varStatus="innerloop">
+
+                                <c:if test = "${chapterList.get(innerloop.index).level == 2}">
+
+                                    <li><a href="/${chapterList.get(innerloop.index).url}">${chapterList.get(innerloop.index).name}</a></li>
+
+
+
+                                </c:if>
+
+
+
+                            </c:forEach>
+
+                        </ul>
+                    </c:if>
+
+
+
+
+
+                 </c:if>
+
+
+
+                <c:if test = "${chapter.level == 3}">
+
+                </c:if>
+
+
+
+            </c:forEach>
+
+
+
             <li data-toggle="collapse" data-target="#chapterSub"  class="collapsed active">
                 <div class="row">
                     <a href="#">
@@ -18,9 +71,6 @@
                         <i class="fas fa-angle-down" style="color: white"></i>
                     </a>
                 </div>
-
-
-
             </li>
             <ul class="sub-menu collapse" id="chapterSub">
                 <li class="active"><a href="#">Subchapter</a></li>
