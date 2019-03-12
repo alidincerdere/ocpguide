@@ -64,7 +64,7 @@
                         </ul>
                     </c:if>
 
-                 </c:if>
+                </c:if>
 
             </c:forEach>
         </ul>
@@ -129,29 +129,29 @@
                 $('#compileResult').text(data);
             }, "json");
 
-/*
-        $.post(
-            '/compileAndRun/',
-            JSON.stringify({"script":$("#comment").val()}),
-            function( data ){
-                alert( "Script Loaded: " + data );
-            },
-            'json'
-        );
-*/
+        /*
+         $.post(
+         '/compileAndRun/',
+         JSON.stringify({"script":$("#comment").val()}),
+         function( data ){
+         alert( "Script Loaded: " + data );
+         },
+         'json'
+         );
+         */
 
-/*
-        $.ajax({
-            url:/compileAndRun/,
-            type:"POST",
-            data:JSON.stringify({"script":$("#comment").val()}),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(data) {
-                alert( "Script Loaded: " + data )
-            }
-        });
-*/
+        /*
+         $.ajax({
+         url:/compileAndRun/,
+         type:"POST",
+         data:JSON.stringify({"script":$("#comment").val()}),
+         contentType:"application/json; charset=utf-8",
+         dataType:"json",
+         success: function(data) {
+         alert( "Script Loaded: " + data )
+         }
+         });
+         */
 
 
 

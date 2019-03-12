@@ -42,3 +42,36 @@ Chapter; Name
 2.6; Summary
 2.7; Exam Essentials
 2.8; Review Questions
+3; Generics and Collections
+3.1; Reviewing OCA Collections
+3.1.1; Array and Array List
+3.1.2; Searching and Sorting
+3.1.3; Wrapper Classes and Autoboxing
+3.1.4; The Diamond Operator
+3.2; Working with Generics
+3.2.1; Generic Classes
+3.2.2; Generic Interfaces
+3.2.3; Generic Methods
+3.2.4; Interacting with Legacy Code
+3.2.5; Bounds
+3.2.6; Putting It All Together
+3.3; Using Lists, Sets, Maps and Queues
+3.3.1; Common Collection Methods
+3.3.2; Using the List Interface
+3.3.3; Using the Set Interface
+3.3.4; Using the Queue Interface
+3.3.5; Map
+3.3.6; Comparing Collection Types
+3.4; Comparator vs. Comparable
+3.4.1; Comparable
+3.4.2; Comparator
+3.5; Searching and Sorting
+3.6; Additions in Java 8
+3.6.1; Using Method References
+3.6.2; Removing Conditionally
+3.6.3; Updating All Elements
+3.6.4; Looping through a Collection
+3.6.5; Using New Java 8 Map APIs
+3.7; Summary
+3.8; Exam Essentials
+3.9; Review Questions
