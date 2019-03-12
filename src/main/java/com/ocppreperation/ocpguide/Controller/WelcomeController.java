@@ -45,11 +45,23 @@ public class WelcomeController {
     @RequestMapping(value = "/{urlFirst}", params = "id", method = RequestMethod.GET)
     public String getPage(final Model model, @RequestParam("id") String id) {
 
-        model.addAttribute("chapterTitle", repository.findById(UUID.fromString(id)).getName());
+        Chapter selectedChapter = repository.findById(UUID.fromString(id));
+
+        model.addAttribute("chapterTitle", selectedChapter.getName());
 
         List<Chapter> chapterList = (List<Chapter>) repository.findAll();
 
         model.addAttribute(chapterList);
+
+
+        if(selectedChapter.getLevel() == 2) {
+            model.addAttribute("selectedFirstLevelParentId", selectedChapter.getParentChapter());
+        }
+        if(selectedChapter.getLevel() == 3 ) {
+            model.addAttribute("selectedSecondLevelParentId", selectedChapter.getParentChapter());
+            model.addAttribute("selectedFirstLevelParentId", repository.findById(selectedChapter.getParentChapter()).getParentChapter());
+        }
+
 
         return "welcome";
     }

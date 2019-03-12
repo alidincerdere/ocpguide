@@ -25,9 +25,25 @@
 
                     <c:if test = "${chapterList.get(loop.index + 1).parentChapter == chapterList.get(loop.index).id}">
 
-                        <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
+                        <c:choose>
+                            <c:when test="${selectedFirstLevelParentId ne null}">
+                                <c:choose>
+                                    <c:when test="${selectedFirstLevelParentId == chapterList.get(loop.index).id}">
+                                        <ul class="sub-menu collapse show" id="chapterSub${chapterList.get(loop.index).id}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
+                                    </c:otherwise>
+                                </c:choose>
 
-                            <c:forEach begin="${loop.index + 1}" end="${chapterList.size()-1}"  var="innerCount">
+                            </c:when>
+                            <c:otherwise>
+                                <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
+                            </c:otherwise>
+                        </c:choose>
+                                
+                                
+                                <c:forEach begin="${loop.index + 1}" end="${chapterList.size()-1}"  var="innerCount">
 
 
                                 <c:if test="${chapterList.get(innerCount).parentChapter == chapterList.get(loop.index).id}">
@@ -43,7 +59,28 @@
                                     <c:if test="${innerCount + 1<=chapterList.size()-1}">
 
                                         <c:if test="${chapterList.get(innerCount + 1).parentChapter == chapterList.get(innerCount).id}">
-                                            <ul class="sub-menu collapse" id="chapterSub${chapterList.get(innerCount).id}">
+                                            
+                                            
+                                            <c:choose>
+                                                <c:when test="${selectedSecondLevelParentId ne null}">
+
+                                                    <c:choose>
+                                                        <c:when test="${selectedSecondLevelParentId == chapterList.get(innerCount).id }">
+                                                            <ul class="sub-menu collapse show" id="chapterSub${chapterList.get(innerCount).id}">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <ul class="sub-menu collapse" id="chapterSub${chapterList.get(innerCount).id}">
+
+                                                        </c:otherwise>
+
+                                                    </c:choose>
+                                                </c:when>
+                                                <c:otherwise>
+
+                                                    <ul class="sub-menu collapse" id="chapterSub${chapterList.get(innerCount).id}">
+                                                </c:otherwise>
+                                                
+                                            </c:choose>
 
                                                 <c:forEach begin="${innerCount + 1}" end="${chapterList.size()-1}"  var="inner3Count">
 
