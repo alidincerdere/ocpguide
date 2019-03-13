@@ -110,7 +110,7 @@ public class Chapter {
     }
 
     public Chapter (int level, String name, String chapterNum) {
-        this(level, name, name.trim(), chapterNum, name.trim() + ".txt");
+        this(level, name, name.trim(), chapterNum, chapterNum.replace('.','_') + "_" +  name.trim().replace(' ','_') + ".txt");
     }
 
     public Chapter (String chapterNum, String name) {

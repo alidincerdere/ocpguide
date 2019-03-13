@@ -1,5 +1,7 @@
 package com.ocppreperation.ocpguide.Controller;
 
+import com.ocppreperation.ocpguide.Model.PageComponent;
+import com.ocppreperation.ocpguide.Service.FileProcessor;
 import com.ocppreperation.ocpguide.jpa.Chapter;
 import com.ocppreperation.ocpguide.jpa.ChapterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class WelcomeController {
 
     @Autowired
     ChapterRepository repository;
+
+    @Autowired
+    FileProcessor fileProcessor;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showWelcomePage(final Model model) {
@@ -62,8 +67,11 @@ public class WelcomeController {
             model.addAttribute("selectedFirstLevelParentId", repository.findById(selectedChapter.getParentChapter()).getParentChapter());
         }
 
+        List<PageComponent> pageComponentList = fileProcessor.readContentFromTxt(selectedChapter.getFileName());
 
-        return "welcome";
+        model.addAttribute(pageComponentList);
+
+        return "pageTemplate";
     }
 /*
     @RequestMapping(value = "/{urlFirst}/{urlSecond}", params = "id", method = RequestMethod.GET)

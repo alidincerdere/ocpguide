@@ -1,14 +1,13 @@
 package com.ocppreperation.ocpguide.Service;
 
+import com.ocppreperation.ocpguide.Model.ComponentType;
+import com.ocppreperation.ocpguide.Model.PageComponent;
 import com.ocppreperation.ocpguide.jpa.Chapter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Component;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,12 @@ import java.util.List;
 public class FileProcessor {
 
     public static String INDEX_CSV_FILENAME = "context/index.csv";
+
+    public static String DESCRIPTION_START_TAG = "Description Start:";
+    public static String DESCRIPTION_END_TAG = "Description End:";
+
+    public static String CODE_START_TAG = "Code Snipped Start:";
+    public static String CODE_END_TAG = "Code Snipped End:";
 
     public static String[] headers = {"Chapter", "Name"};
 
@@ -49,5 +54,104 @@ public class FileProcessor {
 
 
         return chapters;
+    }
+
+    public List<PageComponent> readContentFromTxt(String fileName) {
+
+        List<PageComponent> pageComponentList = new ArrayList<>();
+
+        BufferedReader br = null;
+        FileReader fr = null;
+
+        try {
+            fr = new FileReader("context/" + fileName);
+            br = new BufferedReader(fr);
+
+            String sCurrentLine;
+
+            System.out.println("reading input file...");
+
+            int state = 0;
+
+            PageComponent pageComponent=new PageComponent();
+            StringBuilder content = new StringBuilder();
+            while ((sCurrentLine = br.readLine()) != null) {
+
+                switch (state) {
+                    case 0: //start reading search for tag
+
+
+                        if(sCurrentLine.contains(DESCRIPTION_START_TAG)) {
+                            state = 1;
+                            pageComponent = new PageComponent();
+                            pageComponent.setComponentType(ComponentType.DESCRIPTION);
+                            continue;
+                        }
+
+                        if(sCurrentLine.contains(CODE_START_TAG)) {
+                            state = 2;
+                            pageComponent = new PageComponent();
+                            pageComponent.setComponentType(ComponentType.CODE_SNIPPED);
+                            continue;
+                        }
+
+                    case 1: //description reading started search for description end
+
+                        if(sCurrentLine.contains(DESCRIPTION_END_TAG)) {
+                            state = 0;
+                            pageComponent.setContent(content.toString());
+                            pageComponentList.add(pageComponent);
+                            content = new StringBuilder();
+                            continue;
+                        }
+                        content.append(sCurrentLine);
+
+
+
+                    case 2: // search for code snipped end
+
+                        if(sCurrentLine.contains(CODE_END_TAG)) {
+                            state = 0;
+                            pageComponent.setContent(content.toString());
+                            pageComponentList.add(pageComponent);
+                            content = new StringBuilder();
+                            continue;
+                        }
+                        content.append(sCurrentLine);
+
+                }
+
+
+
+
+            }
+        } catch (FileNotFoundException e) {
+            //e.printStackTrace();
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println(e.getMessage());
+        } finally {
+
+            try {
+
+                if (br != null) {
+                    br.close();
+                }
+
+                if (fr != null) {
+                    fr.close();
+                }
+
+            } catch (IOException ex) {
+
+                //ex.printStackTrace();
+                System.out.println(ex.getMessage());
+
+            }
+
+        }
+
+        return pageComponentList;
     }
 }

@@ -13,61 +13,98 @@
 
             <c:forEach begin="0" end="${chapterList.size()-1}" varStatus="loop" var="outerCount">
 
-                <c:if test = "${chapterList.get(loop.index).level == 1}">
-                    <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(loop.index).id}"  class="collapsed active">
-                        <div class="row">
-                            <a href="#">
-                                <a href="/${chapterList.get(loop.index).url}?id=${chapterList.get(loop.index).id}">${chapterList.get(loop.index).chapterNum}  ${chapterList.get(loop.index).name}</a>
-                                <i class="fas fa-angle-down" style="color: white"></i>
-                            </a>
-                        </div>
-                    </li>
+            <c:if test = "${chapterList.get(loop.index).level == 1}">
+            <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(loop.index).id}"  class="collapsed active">
+                <div class="row">
+                    <a href="#">
+                        <a href="/${chapterList.get(loop.index).url}?id=${chapterList.get(loop.index).id}">${chapterList.get(loop.index).chapterNum}  ${chapterList.get(loop.index).name}</a>
+                        <i class="fas fa-angle-down" style="color: white"></i>
+                    </a>
+                </div>
+            </li>
 
-                    <c:if test = "${chapterList.get(loop.index + 1).parentChapter == chapterList.get(loop.index).id}">
+            <c:if test = "${chapterList.get(loop.index + 1).parentChapter == chapterList.get(loop.index).id}">
 
-                        <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
+            <c:choose>
+            <c:when test="${selectedFirstLevelParentId ne null}">
+            <c:choose>
+            <c:when test="${selectedFirstLevelParentId == chapterList.get(loop.index).id}">
+            <ul class="sub-menu collapse show" id="chapterSub${chapterList.get(loop.index).id}">
+                </c:when>
+                <c:otherwise>
+                <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
+                    </c:otherwise>
+                    </c:choose>
 
-                            <c:forEach begin="${loop.index + 1}" end="${chapterList.size()-1}"  var="innerCount">
+                    </c:when>
+                    <c:otherwise>
+                    <ul class="sub-menu collapse" id="chapterSub${chapterList.get(loop.index).id}">
+                        </c:otherwise>
+                        </c:choose>
 
 
-                                <c:if test="${chapterList.get(innerCount).parentChapter == chapterList.get(loop.index).id}">
-                                    <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(innerCount).id}"  class="collapsed active">
-                                        <div class="row">
-                                            <a href="#">
-                                                <a href="/${chapterList.get(innerCount).url}?id=${chapterList.get(innerCount).id}">${chapterList.get(innerCount).chapterNum}  ${chapterList.get(innerCount).name}</a>
-                                                <i class="fas fa-angle-down" style="color: white"></i>
-                                            </a>
-                                        </div>
-                                    </li>
+                        <c:forEach begin="${loop.index + 1}" end="${chapterList.size()-1}"  var="innerCount">
 
-                                    <c:if test="${innerCount + 1<=chapterList.size()-1}">
 
-                                        <c:if test="${chapterList.get(innerCount + 1).parentChapter == chapterList.get(innerCount).id}">
-                                            <ul class="sub-menu collapse" id="chapterSub${chapterList.get(innerCount).id}">
+                        <c:if test="${chapterList.get(innerCount).parentChapter == chapterList.get(loop.index).id}">
+                        <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(innerCount).id}"  class="collapsed active">
+                            <div class="row">
+                                <a href="#">
+                                    <a href="/${chapterList.get(innerCount).url}?id=${chapterList.get(innerCount).id}">${chapterList.get(innerCount).chapterNum}  ${chapterList.get(innerCount).name}</a>
+                                    <i class="fas fa-angle-down" style="color: white"></i>
+                                </a>
+                            </div>
+                        </li>
 
-                                                <c:forEach begin="${innerCount + 1}" end="${chapterList.size()-1}"  var="inner3Count">
+                        <c:if test="${innerCount + 1<=chapterList.size()-1}">
 
-                                                    <c:if test="${chapterList.get(inner3Count).parentChapter == chapterList.get(innerCount).id}">
-                                                        <li><a href="/${chapterList.get(inner3Count).url}?id=${chapterList.get(inner3Count).id}">${chapterList.get(inner3Count).chapterNum}  ${chapterList.get(inner3Count).name}</a></li>
-                                                    </c:if>
+                        <c:if test="${chapterList.get(innerCount + 1).parentChapter == chapterList.get(innerCount).id}">
 
-                                                </c:forEach>
 
-                                            </ul>
+                        <c:choose>
+                        <c:when test="${selectedSecondLevelParentId ne null}">
 
+                        <c:choose>
+                        <c:when test="${selectedSecondLevelParentId == chapterList.get(innerCount).id }">
+                        <ul class="sub-menu collapse show" id="chapterSub${chapterList.get(innerCount).id}">
+                            </c:when>
+                            <c:otherwise>
+                            <ul class="sub-menu collapse" id="chapterSub${chapterList.get(innerCount).id}">
+
+                                </c:otherwise>
+
+                                </c:choose>
+                                </c:when>
+                                <c:otherwise>
+
+                                <ul class="sub-menu collapse" id="chapterSub${chapterList.get(innerCount).id}">
+                                    </c:otherwise>
+
+                                    </c:choose>
+
+                                    <c:forEach begin="${innerCount + 1}" end="${chapterList.size()-1}"  var="inner3Count">
+
+                                        <c:if test="${chapterList.get(inner3Count).parentChapter == chapterList.get(innerCount).id}">
+                                            <li><a href="/${chapterList.get(inner3Count).url}?id=${chapterList.get(inner3Count).id}">${chapterList.get(inner3Count).chapterNum}  ${chapterList.get(inner3Count).name}</a></li>
                                         </c:if>
-                                    </c:if>
+
+                                    </c:forEach>
+
+                                </ul>
+
+                                </c:if>
+                                </c:if>
                                 </c:if>
 
+                                </c:forEach>
+
+                            </ul>
+                            </c:if>
+
+                            </c:if>
+
                             </c:forEach>
-
                         </ul>
-                    </c:if>
-
-                </c:if>
-
-            </c:forEach>
-        </ul>
     </div>
     <!-- /#sidebar-wrapper -->
 
@@ -75,24 +112,38 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <h1>${chapterTitle}</h1>
-            <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+
             <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
 
+            <c:forEach var="pageComponent" items="${pageComponentList}">
 
-            <div class="form-group">
-                <label for="comment">Comment:</label>
-                <textarea class="form-control" rows="15" id="comment"></textarea>
+                <c:if test="${pageComponent.componentType == 'DESCRIPTION'}">
+                    <p>${pageComponent.content}</p>
+                </c:if>
 
-            </div>
 
-            <div class="form-group">
-                <a id="myCompile" class="btn btn-primary" href="#" role="button">Run</a>
-            </div>
+                <c:if test="${pageComponent.componentType == 'CODE_SNIPPED'}">
 
-            <div class="form-group">
-                <textarea class="form-control" rows="3" id="compileResult"></textarea>
-            </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="15" id="comment">${pageComponent.content}</textarea>
+
+                    </div>
+
+                    <div class="form-group">
+                        <a id="myCompile" class="btn btn-primary" href="#" role="button">Run</a>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="compileResult"></textarea>
+                    </div>
+                </c:if>
+
+            </c:forEach>
+
+
+
+
         </div>
     </div>
     <!-- /#page-content-wrapper -->
