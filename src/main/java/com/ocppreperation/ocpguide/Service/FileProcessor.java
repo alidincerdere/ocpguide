@@ -42,8 +42,8 @@ public class FileProcessor {
                     .withFirstRecordAsHeader()
                     .parse(in);
 
-            for(CSVRecord record : records) {
-               chapters.add( new Chapter(record.get(0), record.get(1)));
+            for (CSVRecord record : records) {
+                chapters.add(new Chapter(record.get(0), record.get(1)));
             }
 
         } catch (FileNotFoundException e) {
@@ -73,55 +73,52 @@ public class FileProcessor {
 
             int state = 0;
 
-            PageComponent pageComponent=new PageComponent();
-            StringBuilder content = new StringBuilder();
+            PageComponent pageComponent = new PageComponent();
             while ((sCurrentLine = br.readLine()) != null) {
 
                 switch (state) {
                     case 0: //start reading search for tag
 
 
-                        if(sCurrentLine.contains(DESCRIPTION_START_TAG)) {
+                        if (sCurrentLine.contains(DESCRIPTION_START_TAG)) {
                             state = 1;
                             pageComponent = new PageComponent();
                             pageComponent.setComponentType(ComponentType.DESCRIPTION);
                             continue;
                         }
 
-                        if(sCurrentLine.contains(CODE_START_TAG)) {
+                        if (sCurrentLine.contains(CODE_START_TAG)) {
                             state = 2;
                             pageComponent = new PageComponent();
                             pageComponent.setComponentType(ComponentType.CODE_SNIPPED);
                             continue;
                         }
 
+                        break;
+
                     case 1: //description reading started search for description end
 
-                        if(sCurrentLine.contains(DESCRIPTION_END_TAG)) {
+                        if (sCurrentLine.contains(DESCRIPTION_END_TAG)) {
                             state = 0;
-                            pageComponent.setContent(content.toString());
                             pageComponentList.add(pageComponent);
-                            content = new StringBuilder();
                             continue;
                         }
-                        content.append(sCurrentLine);
-
-
+                        pageComponent.getContent().add(sCurrentLine);
+                        break;
 
                     case 2: // search for code snipped end
 
-                        if(sCurrentLine.contains(CODE_END_TAG)) {
+                        if (sCurrentLine.contains(CODE_END_TAG)) {
                             state = 0;
-                            pageComponent.setContent(content.toString());
                             pageComponentList.add(pageComponent);
-                            content = new StringBuilder();
                             continue;
                         }
-                        content.append(sCurrentLine);
+                        pageComponent.getContent().add(sCurrentLine);
+
+                        break;
+
 
                 }
-
-
 
 
             }

@@ -1,5 +1,8 @@
 package com.ocppreperation.ocpguide.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by adere on 12.03.2019.
  */
@@ -7,7 +10,7 @@ public class PageComponent {
 
     private ComponentType componentType;
 
-    private String content;
+    private List<String> content;
 
     public ComponentType getComponentType() {
         return componentType;
@@ -17,11 +20,16 @@ public class PageComponent {
         this.componentType = componentType;
     }
 
-    public String getContent() {
+    public List<String> getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(List<String> content) {
         this.content = content;
+    }
+
+    public PageComponent() {
+
+        content = new ArrayList<>();
     }
 }

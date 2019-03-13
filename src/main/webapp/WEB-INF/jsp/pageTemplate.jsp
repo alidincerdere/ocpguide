@@ -118,15 +118,23 @@
             <c:forEach var="pageComponent" items="${pageComponentList}">
 
                 <c:if test="${pageComponent.componentType == 'DESCRIPTION'}">
-                    <p>${pageComponent.content}</p>
+                    <c:forEach var="descLine" items="${pageComponent.content}">
+                        <p>${descLine}</p>
+                    </c:forEach>
+
                 </c:if>
 
 
                 <c:if test="${pageComponent.componentType == 'CODE_SNIPPED'}">
 
                     <div class="form-group">
-                        <label for="comment">Comment:</label>
-                        <textarea class="form-control" rows="15" id="comment">${pageComponent.content}</textarea>
+                        <label for="comment">Code Snipped:</label>
+                        <textarea class="form-control" rows="15" id="comment">
+                            <c:forEach var="codeLine" items="${pageComponent.content}">
+                                ${codeLine}
+                            </c:forEach>
+                        </textarea>
+
 
                     </div>
 
@@ -165,6 +173,7 @@
 
     $('#myCompile').click(function(){
         compile();
+        return false;
     });
 
     function compile() {
