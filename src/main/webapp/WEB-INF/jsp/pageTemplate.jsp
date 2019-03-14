@@ -130,8 +130,8 @@
 
                     <div class="form-group">
                         <label for="comment_${contentLoop}">Code Snipped:</label>
-                        <textarea class="form-control" rows="15" id="comment_${contentLoop}">
-                            <c:forEach var="codeLine" items="${pageComponent.content}">${codeLine}
+
+                        <textarea class="form-control myCodeText" rows="15" id="comment_${contentLoop}" style="background-color:black;text-align: left; color: #999999;" ><c:forEach var="codeLine" items="${pageComponent.content}">${codeLine}
                             </c:forEach>
                         </textarea>
 
@@ -187,5 +187,21 @@
             }, "json");
 
     }
+
+    $( document ).ready(function() {
+        console.log( "ready!" );
+
+        $(".myCodeText").each(function( index ) {
+            var myCodeMirror = CodeMirror.fromTextArea(this,{mode:"clike", lineNumbers:true});
+        });
+
+        //var myCodeMirror = CodeMirror.fromTextArea(myCodeText,{mode:"java", lineNumbers:true});
+        /*
+        var myCodeMirror = CodeMirror(function(elt) {
+            myTextArea.parentNode.replaceChild(elt, myTextArea);
+        }, {value: myTextArea.value});
+        */
+
+    });
 </script>
 <%@ include file="common/footer.jspf"%>
