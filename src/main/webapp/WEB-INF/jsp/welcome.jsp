@@ -6,7 +6,7 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
+                <a href="${baseUrl}">
                     OCP Preparation Guide
                 </a>
             </li>
@@ -111,25 +111,13 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <h1>${chapterTitle}</h1>
-            <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-            <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+            <h1>WELCOME TO OCP PREPARATION GUIDE</h1>
+            <p>This site helps you to prepare JAVA 8 OCP exam</p>
+            <p>The content and code samples are taken from the book OCP Oracle Certified Professional JAVA SE 8 Programmer 2 by Jeanne Boyarsky and Scott Selikoff</p>
+
             <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
 
 
-            <div class="form-group">
-                <label for="comment">Comment:</label>
-                <textarea class="form-control" rows="15" id="comment"></textarea>
-
-            </div>
-
-            <div class="form-group">
-                <a id="myCompile" class="btn btn-primary" href="#" role="button">Run</a>
-            </div>
-
-            <div class="form-group">
-                <textarea class="form-control" rows="3" id="compileResult"></textarea>
-            </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -149,49 +137,5 @@
         $("#wrapper").toggleClass("toggled");
     });
 
-    $('#myCompile').click(function(){
-        compile();
-    });
-
-    function compile() {
-        console.log("hey");
-
-        $.ajaxSetup({
-            contentType:"application/json;charset=utf-8"
-        })
-
-        $.post( "/compileAndRun/", JSON.stringify({"script":$("#comment").val()}))
-            .done(function( data ) {
-                //alert( "Script Loaded: " + data );
-                $('#compileResult').text(data);
-            }, "json");
-
-/*
-        $.post(
-            '/compileAndRun/',
-            JSON.stringify({"script":$("#comment").val()}),
-            function( data ){
-                alert( "Script Loaded: " + data );
-            },
-            'json'
-        );
-*/
-
-/*
-        $.ajax({
-            url:/compileAndRun/,
-            type:"POST",
-            data:JSON.stringify({"script":$("#comment").val()}),
-            contentType:"application/json; charset=utf-8",
-            dataType:"json",
-            success: function(data) {
-                alert( "Script Loaded: " + data )
-            }
-        });
-*/
-
-
-
-    }
 </script>
 <%@ include file="common/footer.jspf"%>

@@ -5,8 +5,10 @@ import com.ocppreperation.ocpguide.Service.FileProcessor;
 import com.ocppreperation.ocpguide.jpa.Chapter;
 import com.ocppreperation.ocpguide.jpa.ChapterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,9 @@ public class WelcomeController {
     @Autowired
     FileProcessor fileProcessor;
 
+    @Value("${base.url}")
+    public String baseUrl;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showWelcomePage(final Model model) {
 
@@ -35,6 +40,8 @@ public class WelcomeController {
 
         model.addAttribute("chapterTitle", chapterList.get(0).getName());
         model.addAttribute(chapterList);
+
+        model.addAttribute("baseUrl",baseUrl);
 
         return "welcome";
     }
@@ -49,6 +56,8 @@ public class WelcomeController {
 
     @RequestMapping(value = "/{urlFirst}", params = "id", method = RequestMethod.GET)
     public String getPage(final Model model, @RequestParam("id") String id) {
+
+        model.addAttribute("baseUrl",baseUrl);
 
         Chapter selectedChapter = repository.findById(UUID.fromString(id));
 

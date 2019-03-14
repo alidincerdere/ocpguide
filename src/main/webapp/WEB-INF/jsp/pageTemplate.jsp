@@ -6,7 +6,7 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
+                <a href="${baseUrl}">
                     OCP Preparation Guide
                 </a>
             </li>
@@ -115,6 +115,7 @@
 
             <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
 
+            <c:set var = "contentLoop" value = "${0}"/>
             <c:forEach var="pageComponent" items="${pageComponentList}">
 
                 <c:if test="${pageComponent.componentType == 'DESCRIPTION'}">
@@ -146,6 +147,8 @@
                         <textarea class="form-control" rows="3" id="compileResult"></textarea>
                     </div>
                 </c:if>
+
+                <c:set var = "contentLoop" value = "${contentLoop + 1}"/>
 
             </c:forEach>
 
