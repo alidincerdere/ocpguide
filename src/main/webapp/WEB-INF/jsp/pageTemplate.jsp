@@ -129,10 +129,9 @@
                 <c:if test="${pageComponent.componentType == 'CODE_SNIPPED'}">
 
                     <div class="form-group">
-                        <label for="comment">Code Snipped:</label>
-                        <textarea class="form-control" rows="15" id="comment">
-                            <c:forEach var="codeLine" items="${pageComponent.content}">
-                                ${codeLine}
+                        <label for="comment_${contentLoop}">Code Snipped:</label>
+                        <textarea class="form-control" rows="15" id="comment_${contentLoop}">
+                            <c:forEach var="codeLine" items="${pageComponent.content}">${codeLine}
                             </c:forEach>
                         </textarea>
 
@@ -140,11 +139,11 @@
                     </div>
 
                     <div class="form-group">
-                        <a id="myCompile" class="btn btn-primary" href="#" role="button">Run</a>
+                        <a id="myCompile_${contentLoop}" class="btn btn-primary" href="#" onclick="compile(${contentLoop}); return false" role="button">Run</a>
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="compileResult"></textarea>
+                        <textarea class="form-control" rows="3" id="compileResult_${contentLoop}"></textarea>
                     </div>
                 </c:if>
 
@@ -174,49 +173,18 @@
         $("#wrapper").toggleClass("toggled");
     });
 
-    $('#myCompile').click(function(){
-        compile();
-        return false;
-    });
-
-    function compile() {
+    function compile(sequenceNum) {
         console.log("hey");
 
         $.ajaxSetup({
             contentType:"application/json;charset=utf-8"
         })
 
-        $.post( "/compileAndRun/", JSON.stringify({"script":$("#comment").val()}))
+        $.post( "/compileAndRun/", JSON.stringify({"script":$("#comment"+ "_" + sequenceNum).val()}))
             .done(function( data ) {
                 //alert( "Script Loaded: " + data );
-                $('#compileResult').text(data);
+                $('#compileResult' + "_" + sequenceNum).text(data);
             }, "json");
-
-        /*
-         $.post(
-         '/compileAndRun/',
-         JSON.stringify({"script":$("#comment").val()}),
-         function( data ){
-         alert( "Script Loaded: " + data );
-         },
-         'json'
-         );
-         */
-
-        /*
-         $.ajax({
-         url:/compileAndRun/,
-         type:"POST",
-         data:JSON.stringify({"script":$("#comment").val()}),
-         contentType:"application/json; charset=utf-8",
-         dataType:"json",
-         success: function(data) {
-         alert( "Script Loaded: " + data )
-         }
-         });
-         */
-
-
 
     }
 </script>

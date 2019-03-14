@@ -1,6 +1,6 @@
 Description Start:
 
-The OCP exAm TOPiCs COvereD in This ChAPTer inCluDe The fOllOwing:
+The OCP exam Topics Covered in this chapter include The following:
 ✓ Java Class Design
 ■ Implement inheritance including visibility modifiers and
 composition
@@ -23,6 +23,25 @@ public class HelloWorld {
     public static void main(String[] args) {
         // Prints "Hello, World" to the terminal window.
         System.out.println("Hello, World");
+    }
+
+}
+
+Code Snipped End:
+
+Description Start:
+
+Code Sample is as below.
+
+Description End:
+
+Code Snipped Start:
+
+public class HelloWorld {
+
+    public static void main(String[] args) {
+        // Prints "Hello, Ali Dinçer" to the terminal window.
+        System.out.println("Hello, Ali Dinçer");
     }
 
 }
