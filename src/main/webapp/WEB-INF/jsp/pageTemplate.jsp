@@ -180,7 +180,11 @@
             contentType:"application/json;charset=utf-8"
         })
 
-        $.post( "/compileAndRun/", JSON.stringify({"script":$("#comment"+ "_" + sequenceNum).val()}))
+        var thisVar = $("#comment"+ "_" + sequenceNum).next()[0];
+        //debugger;
+        //console.log(thisVar.getValue());
+        //console.log(thisVar.CodeMirror.getValue());
+        $.post( "/compileAndRun/", JSON.stringify({"script":thisVar.CodeMirror.getValue()}))
             .done(function( data ) {
                 //alert( "Script Loaded: " + data );
                 $('#compileResult' + "_" + sequenceNum).text(data);
@@ -193,6 +197,7 @@
 
         $(".myCodeText").each(function( index ) {
             var myCodeMirror = CodeMirror.fromTextArea(this,{mode:"clike", lineNumbers:true});
+            //console.log(myCodeMirror.getValue());
         });
 
         //var myCodeMirror = CodeMirror.fromTextArea(myCodeText,{mode:"java", lineNumbers:true});
