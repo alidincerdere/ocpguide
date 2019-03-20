@@ -111,7 +111,7 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <h1>MY OCP PREPARATION NOTES</h1>
+            <h1>MY JAVA 8 OCP EXAM PREPARATION NOTES</h1>
             <p>This site includes my notes to prepare JAVA 8 OCP exam</p>
             <p>Almost all of the content and code samples are taken from the book OCP Oracle Certified Professional JAVA SE 8 Programmer 2 by Jeanne Boyarsky and Scott Selikoff</p>
 
