@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ocppreperation</groupId>
 	<artifactId>ocpguide</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>ocpguide</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -129,5 +129,22 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<!--
+
+	<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>56441f1a3a74-releases</name>
+			<url>http://18.188.220.139/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>56441f1a3a74-snapshots</name>
+			<url>http://18.188.220.139/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	-->
 
 </project>
