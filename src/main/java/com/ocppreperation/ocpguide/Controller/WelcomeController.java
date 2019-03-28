@@ -49,6 +49,7 @@ public class WelcomeController {
     @RequestMapping(value = "/chapterOne", method = RequestMethod.GET)
     public String deneme(Model model) {
 
+        
         return "deneme";
     }
 
