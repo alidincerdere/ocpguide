@@ -25,11 +25,17 @@ public class CompileRequestController {
 
         Response response = compilerRestClient.sendCompileRequest(script);
 
+        if(response.getStatus()!=HttpStatus.OK.value()) {
+            System.out.println("Bad Response " + response.toString());
+            return "Bad Response " +  response.getStatus();
+        }
+
         CompileOutput compileOutput = response.readEntity(CompileOutput.class);
 
         if(compileOutput.getStatusCode() == HttpStatus.OK.value()) {
 
             return compileOutput.getOutput();
+
         }
 
         return "Consult Administrator" + compileOutput.getStatusCode();
