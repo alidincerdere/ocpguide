@@ -81,6 +81,16 @@ public class WelcomeController {
 
         model.addAttribute(pageComponentList);
 
+        if(selectedChapter.getNextChapter() != null) {
+            Chapter nextChapter = repository.findById(selectedChapter.getNextChapter());
+            model.addAttribute("nextPage", nextChapter);
+        }
+
+        if(selectedChapter.getPreviousChapter() != null) {
+            Chapter prevChapter = repository.findById(selectedChapter.getPreviousChapter());
+            model.addAttribute("prevPage", prevChapter);
+        }
+
         return "pageTemplate";
     }
 /*

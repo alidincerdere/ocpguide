@@ -151,8 +151,27 @@
 
             </c:forEach>
 
+        </div>
 
+        <br />
+        <div class="row">
 
+            <br />
+            <div class="col-sm-4">
+                <c:if test="${prevPage ne null}">
+                    <a id="prev_page" class="btn btn-primary" href="/${prevPage.url}?id=${prevPage.id}" role="button">Previous Chapter</a>
+                </c:if>
+            </div>
+
+            <div class="col-sm-4">
+
+            </div>
+
+            <div class="col-sm-4" style="align-content: flex-end">
+                <c:if test="${nextPage ne null}">
+                    <a id="next_page" class="btn btn-primary"  href="/${nextPage.url}?id=${nextPage.id}" role="button">Next Chapter</a>
+                </c:if>
+            </div>
 
         </div>
     </div>
