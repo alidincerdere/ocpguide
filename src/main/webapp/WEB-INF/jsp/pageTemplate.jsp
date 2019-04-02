@@ -156,6 +156,7 @@
         <br />
         <div class="row">
 
+            For deployment trial
             <br />
             <div class="col-sm-4">
                 <c:if test="${prevPage ne null}">
