@@ -17,7 +17,22 @@
             <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(loop.index).id}"  class="collapsed active">
                 <div class="row">
                     <a href="#">
-                        <a href="/${chapterList.get(loop.index).url}?id=${chapterList.get(loop.index).id}">${chapterList.get(loop.index).chapterNum}  ${chapterList.get(loop.index).name}</a>
+                        <c:choose>
+                            <c:when test="${selectedChapter.level == 1}">
+                                <c:choose>
+                                    <c:when test="${selectedChapter.id == chapterList.get(loop.index).id}">
+                                        <a href="/${chapterList.get(loop.index).url}?id=${chapterList.get(loop.index).id}" style="background: rgba(255, 255, 255, 0.2)">${chapterList.get(loop.index).chapterNum}  ${chapterList.get(loop.index).name}</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="/${chapterList.get(loop.index).url}?id=${chapterList.get(loop.index).id}">${chapterList.get(loop.index).chapterNum}  ${chapterList.get(loop.index).name}</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/${chapterList.get(loop.index).url}?id=${chapterList.get(loop.index).id}">${chapterList.get(loop.index).chapterNum}  ${chapterList.get(loop.index).name}</a>
+                            </c:otherwise>
+                        </c:choose>
+
                         <i class="fas fa-angle-down" style="color: white"></i>
                     </a>
                 </div>
@@ -50,7 +65,22 @@
                         <li data-toggle="collapse" data-target="#chapterSub${chapterList.get(innerCount).id}"  class="collapsed active">
                             <div class="row">
                                 <a href="#">
-                                    <a href="/${chapterList.get(innerCount).url}?id=${chapterList.get(innerCount).id}">${chapterList.get(innerCount).chapterNum}  ${chapterList.get(innerCount).name}</a>
+
+                                    <c:choose>
+                                        <c:when test="${selectedChapter.level == 2}">
+                                            <c:choose>
+                                                <c:when test="${selectedChapter.id == chapterList.get(innerCount).id}">
+                                                    <a href="/${chapterList.get(innerCount).url}?id=${chapterList.get(innerCount).id}" style="background: rgba(255, 255, 255, 0.2)">${chapterList.get(innerCount).chapterNum}  ${chapterList.get(innerCount).name}</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="/${chapterList.get(innerCount).url}?id=${chapterList.get(innerCount).id}">${chapterList.get(innerCount).chapterNum}  ${chapterList.get(innerCount).name}</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="/${chapterList.get(innerCount).url}?id=${chapterList.get(innerCount).id}">${chapterList.get(innerCount).chapterNum}  ${chapterList.get(innerCount).name}</a>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <i class="fas fa-angle-down" style="color: white"></i>
                                 </a>
                             </div>
@@ -85,7 +115,24 @@
                                     <c:forEach begin="${innerCount + 1}" end="${chapterList.size()-1}"  var="inner3Count">
 
                                         <c:if test="${chapterList.get(inner3Count).parentChapter == chapterList.get(innerCount).id}">
-                                            <li><a href="/${chapterList.get(inner3Count).url}?id=${chapterList.get(inner3Count).id}">${chapterList.get(inner3Count).chapterNum}  ${chapterList.get(inner3Count).name}</a></li>
+                                            <li>
+
+                                                <c:choose>
+                                                    <c:when test="${selectedChapter.level == 3}">
+                                                        <c:choose>
+                                                            <c:when test="${selectedChapter.id == chapterList.get(inner3Count).id}">
+                                                                <a href="/${chapterList.get(inner3Count).url}?id=${chapterList.get(inner3Count).id}" style="background: rgba(255, 255, 255, 0.2)">${chapterList.get(inner3Count).chapterNum}  ${chapterList.get(inner3Count).name}</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="/${chapterList.get(inner3Count).url}?id=${chapterList.get(inner3Count).id}">${chapterList.get(inner3Count).chapterNum}  ${chapterList.get(inner3Count).name}</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="/${chapterList.get(inner3Count).url}?id=${chapterList.get(inner3Count).id}">${chapterList.get(inner3Count).chapterNum}  ${chapterList.get(inner3Count).name}</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </li>
                                         </c:if>
 
                                     </c:forEach>
@@ -156,7 +203,6 @@
         <br />
         <div class="row">
 
-            For deployment trial
             <br />
             <div class="col-sm-4">
                 <c:if test="${prevPage ne null}">

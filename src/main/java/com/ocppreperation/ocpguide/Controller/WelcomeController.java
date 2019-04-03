@@ -64,6 +64,8 @@ public class WelcomeController {
 
         model.addAttribute("chapterTitle", selectedChapter.getName());
 
+        model.addAttribute("selectedChapter", selectedChapter);
+
         List<Chapter> chapterList = (List<Chapter>) repository.findAll();
 
         model.addAttribute(chapterList);
