@@ -28,6 +28,6 @@
 </head>
 <body>
 <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
-<script src="/static/codemirror//codemirror.js"></script>
+<script src="/static/codemirror/codemirror.js"></script>
 <script src="/static/codemirror/clike.js"></script>
 <script src="/static/codemirror/colorize.js"></script>

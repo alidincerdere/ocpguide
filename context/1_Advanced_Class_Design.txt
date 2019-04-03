@@ -17,7 +17,6 @@ composition
 Description End:
 
 Code Snipped Start:
-
 public class HelloWorld {
 
     public static void main(String[] args) {

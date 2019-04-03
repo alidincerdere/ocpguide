@@ -28,10 +28,9 @@
 
                     <div class="form-group">
                         <label for="comment_${contentLoop}">Code Snipped:</label>
-
-                        <textarea class="form-control myCodeText" rows="15" id="comment_${contentLoop}" style="background-color:black;text-align: left; color: #999999;" ><c:forEach var="codeLine" items="${pageComponent.content}">${codeLine}
-                            </c:forEach>
-                        </textarea>
+<textarea class="form-control myCodeText" rows="15" id="comment_${contentLoop}" style="background-color:black;text-align: left; text-align-all: left; color: #999999;" ><c:forEach var="codeLine" items="${pageComponent.content}">
+${codeLine}</c:forEach>
+</textarea>
 
 
                     </div>
