@@ -1,0 +1,17 @@
+Description Start:
+
+Content here!
+
+Description End:
+
+Code Snipped Start:
+public class HelloWorld {
+
+    public static void main(String[] args) {
+        // Prints "Hello, World" to the terminal window.
+        System.out.println("Hello, World");
+    }
+
+}
+
+Code Snipped End:

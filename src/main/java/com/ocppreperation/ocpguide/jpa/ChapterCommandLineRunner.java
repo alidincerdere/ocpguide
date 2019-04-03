@@ -42,6 +42,11 @@ public class ChapterCommandLineRunner implements CommandLineRunner {
         //save chapters
         repository.saveAll(chapters);
 
+        //create ContentFiles
+        for(Chapter chapter : chapters) {
+            fileProcessor.createContentFileIfNotExist(chapter.getFileName());
+        }
+
 
         log.info("DB Setup complete");
 

@@ -18,6 +18,8 @@ import java.util.List;
 public class FileProcessor {
 
     public static String INDEX_CSV_FILENAME = "context/index.csv";
+    public static String CONTENT_TEMPLATE_FILE_NAME = "context/templateContentFile.txt";
+    public static String CONTENT_DIR = "context/";
 
     public static String DESCRIPTION_START_TAG = "Description Start:";
     public static String DESCRIPTION_END_TAG = "Description End:";
@@ -150,5 +152,50 @@ public class FileProcessor {
         }
 
         return pageComponentList;
+    }
+
+    public void createContentFileIfNotExist(String filename) {
+        try {
+
+            //Path currentRelativePath = Paths.get("");
+            //String workingDir = currentRelativePath.toAbsolutePath().toString();
+
+            //System.out.println("Working Directory is:" + workingDir);
+
+            InputStream inStream = null;
+            OutputStream outStream = null;
+
+            File file = new File(CONTENT_DIR + filename);
+
+            if (file.createNewFile()){
+
+                File templateFile =new File(CONTENT_TEMPLATE_FILE_NAME);
+
+                inStream = new FileInputStream(templateFile);
+                outStream = new FileOutputStream(file);
+
+                byte[] buffer = new byte[1024];
+
+                int length;
+                //copy the file content in bytes
+                while ((length = inStream.read(buffer)) > 0){
+
+                    outStream.write(buffer, 0, length);
+
+                }
+
+                inStream.close();
+                outStream.close();
+
+                System.out.println("File is copied successful!");
+
+                System.out.println("File is created!");
+            }else{
+                System.out.println("File already exists.");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
