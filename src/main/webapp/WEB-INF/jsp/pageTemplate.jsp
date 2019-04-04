@@ -12,15 +12,13 @@
             <div class="row">
                 <div class="col-lg-9">
                     <h1>${chapterTitle}</h1>
+                    <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
                 </div>
                 <div class="col-lg-3">
                     <img src="/static/img/java8logo.png">
                 </div>
             </div>
             
-
-            <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-
             <c:set var = "contentLoop" value = "${0}"/>
             <c:forEach var="pageComponent" items="${pageComponentList}">
 
