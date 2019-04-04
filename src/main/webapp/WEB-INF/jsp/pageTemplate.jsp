@@ -9,7 +9,15 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <h1>${chapterTitle}</h1>
+            <div class="row">
+                <div class="col-lg-9">
+                    <h1>${chapterTitle}</h1>
+                </div>
+                <div class="col-lg-3">
+                    <img src="/static/img/java8logo.png">
+                </div>
+            </div>
+            
 
             <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
 
