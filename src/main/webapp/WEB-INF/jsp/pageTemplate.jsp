@@ -18,7 +18,7 @@
                     <img src="/static/img/java8logo.png">
                 </div>
             </div>
-            
+
             <c:set var = "contentLoop" value = "${0}"/>
             <c:forEach var="pageComponent" items="${pageComponentList}">
 
