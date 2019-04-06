@@ -46,7 +46,7 @@ ${codeLine}</c:forEach>
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="compileResult_${contentLoop}"></textarea>
+                        <textarea class="form-control" rows="3" id="compileResult_${contentLoop}" readonly></textarea>
                     </div>
                 </c:if>
 
