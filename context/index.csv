@@ -1,77 +1,77 @@
-Chapter; Name
-1; Advanced Class Design
-1.1; Using Instanceof
-1.2; Understanding Virtual Method Invocation
-1.3; Annotation Overridden Methods
-1.4; Coding equals, hashCode and toString
-1.4.1; toString
-1.4.2; equals
-1.4.3; hashCode
-1.5; Working with Enums
-1.5.1; Using Enums in Switch Statements
-1.5.2; Adding Constructors, Fields, and Methods
-1.6; Creating Nested Classes
-1.6.1; Member Inner Classes
-1.6.2; Local Inner Classes
-1.6.3; Anonymous Inner Classes
+Chapter; Name; PageType
+1; Advanced Class Design;
+1.1; Using Instanceof;
+1.2; Understanding Virtual Method Invocation;
+1.3; Annotation Overridden Methods;
+1.4; Coding equals, hashCode and toString;
+1.4.1; toString;
+1.4.2; equals;
+1.4.3; hashCode;
+1.5; Working with Enums;
+1.5.1; Using Enums in Switch Statements;
+1.5.2; Adding Constructors, Fields, and Methods;
+1.6; Creating Nested Classes;
+1.6.1; Member Inner Classes;
+1.6.2; Local Inner Classes;
+1.6.3; Anonymous Inner Classes;
 1.6.4; Static Nested Classes;
-1.7; Summary
-1.8; Exam Essentials
-1.9; Review Questions
-2; Design Patterns and Principles
-2.1; Designing an Interface
-2.1.1; Purpose of an Interface
-2.2; Introducing Functional Programming
-2.2.1; Defining a Functional Interface
-2.2.2; Implementing Functional Interfaces with Lambdas
-2.2.3; Applying the Predicate Interface
-2.3; Implementing Polymorphism
-2.3.1; Distinguishing between an Object and a Reference
-2.3.2; Casting Object References
-2.4; Understanding Design Principles
-2.4.1; Encapsulating Data
-2.4.2; Creating JavaBeans
-2.4.3; Applying the Is-a Relationship
-2.4.4; Applying the Has-a Relationship
-2.4.5; Composing Objects
-2.5; Working with Design Patterns
-2.5.1; Applying the Singleton Pattern
-2.5.2; Creating Immutable Objects
-2.5.3; Using the Builder Pattern
-2.5.4; Creating Objects with the Factory Pattern
-2.6; Summary
-2.7; Exam Essentials
-2.8; Review Questions
-3; Generics and Collections
-3.1; Reviewing OCA Collections
-3.1.1; Array and Array List
-3.1.2; Searching and Sorting
-3.1.3; Wrapper Classes and Autoboxing
-3.1.4; The Diamond Operator
-3.2; Working with Generics
-3.2.1; Generic Classes
-3.2.2; Generic Interfaces
-3.2.3; Generic Methods
-3.2.4; Interacting with Legacy Code
-3.2.5; Bounds
-3.2.6; Putting It All Together
-3.3; Using Lists, Sets, Maps and Queues
-3.3.1; Common Collection Methods
-3.3.2; Using the List Interface
-3.3.3; Using the Set Interface
-3.3.4; Using the Queue Interface
-3.3.5; Map
-3.3.6; Comparing Collection Types
-3.4; Comparator vs. Comparable
-3.4.1; Comparable
-3.4.2; Comparator
-3.5; Searching and Sorting
-3.6; Additions in Java 8
-3.6.1; Using Method References
-3.6.2; Removing Conditionally
-3.6.3; Updating All Elements
-3.6.4; Looping through a Collection
-3.6.5; Using New Java 8 Map APIs
-3.7; Summary
-3.8; Exam Essentials
-3.9; Review Questions
+1.7; Summary;
+1.8; Exam Essentials;
+1.9; Review Questions; EXAM
+2; Design Patterns and Principles;
+2.1; Designing an Interface;
+2.1.1; Purpose of an Interface;
+2.2; Introducing Functional Programming;
+2.2.1; Defining a Functional Interface;
+2.2.2; Implementing Functional Interfaces with Lambdas;
+2.2.3; Applying the Predicate Interface;
+2.3; Implementing Polymorphism;
+2.3.1; Distinguishing between an Object and a Reference;
+2.3.2; Casting Object References;
+2.4; Understanding Design Principles;
+2.4.1; Encapsulating Data;
+2.4.2; Creating JavaBeans;
+2.4.3; Applying the Is-a Relationship;
+2.4.4; Applying the Has-a Relationship;
+2.4.5; Composing Objects;
+2.5; Working with Design Patterns;
+2.5.1; Applying the Singleton Pattern;
+2.5.2; Creating Immutable Objects;
+2.5.3; Using the Builder Pattern;
+2.5.4; Creating Objects with the Factory Pattern;
+2.6; Summary;
+2.7; Exam Essentials;
+2.8; Review Questions; EXAM
+3; Generics and Collections;
+3.1; Reviewing OCA Collections;
+3.1.1; Array and Array List;
+3.1.2; Searching and Sorting;
+3.1.3; Wrapper Classes and Autoboxing;
+3.1.4; The Diamond Operator;
+3.2; Working with Generics;
+3.2.1; Generic Classes;
+3.2.2; Generic Interfaces;
+3.2.3; Generic Methods;
+3.2.4; Interacting with Legacy Code;
+3.2.5; Bounds;
+3.2.6; Putting It All Together;
+3.3; Using Lists, Sets, Maps and Queues;
+3.3.1; Common Collection Methods;
+3.3.2; Using the List Interface;
+3.3.3; Using the Set Interface;
+3.3.4; Using the Queue Interface;
+3.3.5; Map;
+3.3.6; Comparing Collection Types;
+3.4; Comparator vs. Comparable;
+3.4.1; Comparable;
+3.4.2; Comparator;
+3.5; Searching and Sorting;
+3.6; Additions in Java 8;
+3.6.1; Using Method References;
+3.6.2; Removing Conditionally;
+3.6.3; Updating All Elements;
+3.6.4; Looping through a Collection;
+3.6.5; Using New Java 8 Map APIs;
+3.7; Summary;
+3.8; Exam Essentials;
+3.9; Review Questions; EXAM

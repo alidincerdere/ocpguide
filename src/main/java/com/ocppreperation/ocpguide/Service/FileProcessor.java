@@ -1,12 +1,19 @@
 package com.ocppreperation.ocpguide.Service;
 
-import com.ocppreperation.ocpguide.Model.ComponentType;
-import com.ocppreperation.ocpguide.Model.PageComponent;
+import com.ocppreperation.ocpguide.Model.*;
 import com.ocppreperation.ocpguide.jpa.Chapter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +25,7 @@ import java.util.List;
 public class FileProcessor {
 
     public static String INDEX_CSV_FILENAME = "context/index.csv";
-    public static String CONTENT_TEMPLATE_FILE_NAME = "context/templateContentFile.txt";
+    public static String CONTENT_TEMPLATE_FILE_NAME = "context/templateContentFile.xml";
     public static String CONTENT_DIR = "context/";
 
     public static String DESCRIPTION_START_TAG = "Description Start:";
@@ -27,7 +34,119 @@ public class FileProcessor {
     public static String CODE_START_TAG = "Code Snipped Start:";
     public static String CODE_END_TAG = "Code Snipped End:";
 
+    public static String QUESTION_XML_TAG = "Question";
+    public static String TEXT_XML_TAG = "Text";
+    public static String CODE_XML_TAG = "Code";
+    public static String OPTIONS_XML_TAG = "Options";
+    public static String OPTION_XML_TAG = "Option";
+    public static String ANSWER_XML_TAG = "Answer";
+    public static String EXPLANATION_XML_TAG = "Explanation";
+    public static String CORRECT_ANSWERS_XML_TAG = "CorrectOptions";
+
+    public static String DESCRIPTION_XML_TAG = "Description";
+
+    public static String CODE_SNIPPED_XML_TAG = "CodeSnipped";
+
+
+
+
     public static String[] headers = {"Chapter", "Name"};
+
+    public List<Question> readQuestionsFromXml(String fileName) {
+
+        List<Question> questions = new ArrayList<>();
+
+        try {
+            File fXmlFile = new File(CONTENT_DIR + fileName);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+            NodeList nList = doc.getElementsByTagName(QUESTION_XML_TAG);
+
+            for(int i=0; i<nList.getLength(); i++) {
+
+                Node nNode = nList.item(i);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) nNode;
+
+                    Question question = new Question();
+
+                    question.setText(eElement.getElementsByTagName(TEXT_XML_TAG).item(0).getTextContent());
+
+                    question.setNumber(i+1);
+
+                    question.setCode(eElement.getElementsByTagName(CODE_XML_TAG).item(0).getTextContent());
+
+
+
+                    Element optionsMain = (Element) eElement.getElementsByTagName(OPTIONS_XML_TAG).item(0);
+
+                    NodeList options = optionsMain.getElementsByTagName(OPTION_XML_TAG);
+
+                    List<Option> optionList = new ArrayList<>();
+
+                    for(int j=0; j<options.getLength(); j++) {
+
+                        Element optionElement = (Element) options.item(j);
+
+                        Option option = new Option();
+                        option.setLetter(OptionLetter.values()[j]);
+                        option.setOptionText(optionElement.getTextContent());
+                        optionList.add(option);
+
+                    }
+
+                    question.setOptions(optionList);
+
+
+                    Element answerXml = (Element) eElement.getElementsByTagName(ANSWER_XML_TAG).item(0);
+
+                    Element explanation = (Element) answerXml.getElementsByTagName(EXPLANATION_XML_TAG).item(0);
+
+                    Element correctAnswersXml = (Element) answerXml.getElementsByTagName(CORRECT_ANSWERS_XML_TAG).item(0);
+
+
+                    Answer answer = new Answer();
+                    answer.setExplanation(explanation.getTextContent());
+
+                    String[] correctOptions = correctAnswersXml.getTextContent().split(",");
+
+                    List<Option> correctAnswers = new ArrayList<>();
+
+                    for (String letter: correctOptions) {
+                        Option correctOption = new Option();
+                        correctOption.setLetter(OptionLetter.valueOf(letter));
+                        correctAnswers.add(correctOption);
+                    }
+
+                    answer.setCorrectOptios(correctAnswers);
+
+                    question.setCorrectAnswer(answer);
+
+                    questions.add(question);
+                }
+
+            }
+
+
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+        return questions;
+    }
 
 
     public List<Chapter> readChaptersFromCSV() {
@@ -45,7 +164,8 @@ public class FileProcessor {
                     .parse(in);
 
             for (CSVRecord record : records) {
-                chapters.add(new Chapter(record.get(0), record.get(1)));
+                PageType pageType = record.get(2) == null || record.get(2).contentEquals("") ? PageType.LECTURE : PageType.EXAM;
+                chapters.add(new Chapter(record.get(0), record.get(1), pageType));
             }
 
         } catch (FileNotFoundException e) {
@@ -58,6 +178,59 @@ public class FileProcessor {
         return chapters;
     }
 
+    public List<PageComponent> readContentFromXml(String fileName) {
+        List<PageComponent> pageComponentList = new ArrayList<>();
+
+
+        try {
+            File fXmlFile = new File(CONTENT_DIR + fileName);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+            NodeList nodeList = doc.getDocumentElement().getChildNodes();
+
+            for (int i=0; i<nodeList.getLength(); i++) {
+
+                PageComponent pageComponent = new PageComponent();
+
+                Node node = nodeList.item(i);
+
+                if(node.getNodeName().contentEquals(DESCRIPTION_XML_TAG) || node.getNodeName().contentEquals(CODE_SNIPPED_XML_TAG)) {
+
+                    if (node.getNodeName().contentEquals(DESCRIPTION_XML_TAG)) {
+                        pageComponent.setComponentType(ComponentType.DESCRIPTION);
+                    } else {
+                        pageComponent.setComponentType(ComponentType.CODE_SNIPPED);
+                    }
+                    String[] contentLines = node.getTextContent().split("\\n");
+                    List<String> content = new ArrayList<>();
+                    for (String contentLine : contentLines) {
+                        content.add(contentLine);
+                    }
+
+                    pageComponent.setContent(content);
+                    pageComponentList.add(pageComponent);
+                }
+            }
+
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+
+        return pageComponentList;
+    }
+/*
     public List<PageComponent> readContentFromTxt(String fileName) {
 
         List<PageComponent> pageComponentList = new ArrayList<>();
@@ -153,7 +326,7 @@ public class FileProcessor {
 
         return pageComponentList;
     }
-
+    */
     public void createContentFileIfNotExist(String filename) {
         try {
 

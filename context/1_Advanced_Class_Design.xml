@@ -1,0 +1,37 @@
+<Lecture>
+    <Description>
+        The OCP exam Topics Covered in this chapter include The following:
+        ✓ Java Class Design
+        ■ Implement inheritance including visibility modifiers and
+        composition
+        ■ Implement polymorphism
+        ■ Override hashCode, equals, and toString methods from Object class
+        ■ Develop code that uses the static keyword on initialize blocks, variables, methods, and classes
+        ✓ Advanced Java Class Design
+        ■ Develop code that uses abstract classes and methods
+        ■ Develop code that uses final keyword
+        ■ Create inner classes including static inner class, local class, nested class, and anonymous inner class
+        ■ Use enumerated types including methods, and constructors in an enum type
+        ■ Develop code that declares, implements, and/or extends interface and use the @Override annotation
+    </Description><CodeSnipped>
+public class HelloWorld {
+    public static void main(String[] args) {
+        // Prints "Hello, World" to the terminal window.
+        System.out.println("Hello, World");
+    }
+}
+    </CodeSnipped>
+    <Description>
+        For testing CD pipeline trial 1
+
+        Code Sample is as below.
+    </Description><CodeSnipped>
+public class HelloWorld {
+    public static void main(String[] args) {
+        // Prints "Hello, Ali Dinçer" to the terminal window.
+        System.out.println("Hello, Ali Dinçer");
+    }
+}
+    </CodeSnipped>
+</Lecture>
+

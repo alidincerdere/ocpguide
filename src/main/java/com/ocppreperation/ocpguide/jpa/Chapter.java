@@ -1,5 +1,7 @@
 package com.ocppreperation.ocpguide.jpa;
 
+import com.ocppreperation.ocpguide.Model.PageType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +33,8 @@ public class Chapter {
     private UUID previousChapter;
 
     private UUID parentChapter;
+
+    private PageType pageType;
 
     public int getLevel() {
         return level;
@@ -100,24 +104,33 @@ public class Chapter {
         return id;
     }
 
-    public Chapter(int level, String name, String url, String chapterNum, String fileName) {
+    public Chapter(int level, String name, String url, String chapterNum, String fileName, PageType pageType) {
         this.id = UUID.randomUUID();
         this.level = level;
         this.name = name;
         this.url = url;
         this.chapterNum = chapterNum;
         this.fileName = fileName;
+        this.pageType = pageType;
     }
 
-    public Chapter (int level, String name, String chapterNum) {
-        this(level, name, name.trim(), chapterNum, chapterNum.replace('.','_') + "_" +  name.trim().replace(' ','_') + ".txt");
+    public Chapter (int level, String name, String chapterNum, PageType pageType) {
+        this(level, name, name.trim(), chapterNum, chapterNum.replace('.','_') + "_" +  name.trim().replace(' ','_') + ".xml", pageType);
     }
 
-    public Chapter (String chapterNum, String name) {
+    public Chapter (String chapterNum, String name, PageType pageType) {
 
-        this(chapterNum.split("\\.").length, name, chapterNum);
+        this(chapterNum.split("\\.").length, name, chapterNum, pageType);
     }
 
     public Chapter() {
+    }
+
+    public PageType getPageType() {
+        return pageType;
+    }
+
+    public void setPageType(PageType pageType) {
+        this.pageType = pageType;
     }
 }

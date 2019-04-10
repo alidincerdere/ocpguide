@@ -1,6 +1,8 @@
 package com.ocppreperation.ocpguide.Controller;
 
 import com.ocppreperation.ocpguide.Model.PageComponent;
+import com.ocppreperation.ocpguide.Model.PageType;
+import com.ocppreperation.ocpguide.Model.Question;
 import com.ocppreperation.ocpguide.Service.FileProcessor;
 import com.ocppreperation.ocpguide.jpa.Chapter;
 import com.ocppreperation.ocpguide.jpa.ChapterRepository;
@@ -79,21 +81,35 @@ public class WelcomeController {
             model.addAttribute("selectedFirstLevelParentId", repository.findById(selectedChapter.getParentChapter()).getParentChapter());
         }
 
-        List<PageComponent> pageComponentList = fileProcessor.readContentFromTxt(selectedChapter.getFileName());
+        if(selectedChapter.getPageType() == PageType.LECTURE) {
 
-        model.addAttribute(pageComponentList);
+            //List<PageComponent> pageComponentList = fileProcessor.readContentFromTxt(selectedChapter.getFileName());
 
-        if(selectedChapter.getNextChapter() != null) {
-            Chapter nextChapter = repository.findById(selectedChapter.getNextChapter());
-            model.addAttribute("nextPage", nextChapter);
+            List<PageComponent> pageComponentList = fileProcessor.readContentFromXml(selectedChapter.getFileName());
+
+
+            model.addAttribute(pageComponentList);
+
+            if (selectedChapter.getNextChapter() != null) {
+                Chapter nextChapter = repository.findById(selectedChapter.getNextChapter());
+                model.addAttribute("nextPage", nextChapter);
+            }
+
+            if (selectedChapter.getPreviousChapter() != null) {
+                Chapter prevChapter = repository.findById(selectedChapter.getPreviousChapter());
+                model.addAttribute("prevPage", prevChapter);
+            }
+
+            return "pageTemplate";
+
+        } else {
+
+            List<Question> questionList = fileProcessor.readQuestionsFromXml(selectedChapter.getFileName());
+
+            model.addAttribute(questionList);
+
+            return "examTemplate";
         }
-
-        if(selectedChapter.getPreviousChapter() != null) {
-            Chapter prevChapter = repository.findById(selectedChapter.getPreviousChapter());
-            model.addAttribute("prevPage", prevChapter);
-        }
-
-        return "pageTemplate";
     }
 /*
     @RequestMapping(value = "/{urlFirst}/{urlSecond}", params = "id", method = RequestMethod.GET)
