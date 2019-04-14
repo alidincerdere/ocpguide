@@ -116,6 +116,8 @@ public class FileProcessor {
                     Answer answer = new Answer();
                     answer.setExplanation(explanation.getTextContent());
 
+                    question.setSerializedCorrectAnswer(correctAnswersXml.getTextContent());
+
                     String[] correctOptions = correctAnswersXml.getTextContent().split(",");
 
                     List<Option> correctAnswers = new ArrayList<>();
@@ -126,7 +128,7 @@ public class FileProcessor {
                         correctAnswers.add(correctOption);
                     }
 
-                    answer.setCorrectOptios(correctAnswers);
+                    answer.setCorrectOptions(correctAnswers);
 
                     question.setCorrectAnswer(answer);
 

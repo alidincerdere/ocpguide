@@ -7,23 +7,23 @@ import java.util.List;
  */
 public class Answer {
 
-    private List<Option> correctOptios;
+    private List<Option> correctOptions;
 
-    private String Explanation;
+    private String explanation;
 
-    public List<Option> getCorrectOptios() {
-        return correctOptios;
+    public List<Option> getCorrectOptions() {
+        return correctOptions;
     }
 
-    public void setCorrectOptios(List<Option> correctOptios) {
-        this.correctOptios = correctOptios;
+    public void setCorrectOptions(List<Option> correctOptios) {
+        this.correctOptions = correctOptions;
     }
 
     public String getExplanation() {
-        return Explanation;
+        return explanation;
     }
 
     public void setExplanation(String explanation) {
-        Explanation = explanation;
+        this.explanation = explanation;
     }
 }

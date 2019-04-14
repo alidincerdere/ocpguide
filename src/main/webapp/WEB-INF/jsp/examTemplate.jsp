@@ -19,40 +19,48 @@
                 </div>
             </div>
 
-            <c:set var = "contentLoop" value = "${0}"/>
-            <c:forEach var="pageComponent" items="${pageComponentList}">
-
-                <c:if test="${pageComponent.componentType == 'DESCRIPTION'}">
-                    <c:forEach var="descLine" items="${pageComponent.content}">
-                        <p>${descLine}</p>
-                    </c:forEach>
-
-                </c:if>
 
 
-                <c:if test="${pageComponent.componentType == 'CODE_SNIPPED'}">
+                <c:forEach var="question" items="${questionList}">
 
-                    <div class="form-group">
-                        <label for="comment_${contentLoop}">Code Snipped:</label>
-                        <textarea class="form-control myCodeText" rows="15" id="comment_${contentLoop}" style="background-color:black;text-align: left; text-align-all: left; color: #999999;" ><c:forEach var="codeLine" items="${pageComponent.content}">
-                            ${codeLine}</c:forEach>
-</textarea>
+                    <div class="row">
+                        <p>${question.number}.${question.text}</p>
+                    </div>
+
+                    <br/>
+
+                    <div class="row">
+                        <c:if test="${question.code ne null}">
+                            <textarea class="form-control myCodeText"  id="code_${question.number}" style="background-color:black;text-align: left; text-align-all: left; color: #999999;">${question.code}</textarea>
+                        </c:if>
+                    </div>
+
+                    <br/>
+
+                    <div class="row">
+                        <form onsubmit="return checkAnswer(${question.number},'${question.serializedCorrectAnswer}','${question.explanation}');">
+                        <c:forEach var="option" items="${question.options}">
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="${option.letter}" name="checkbox_${question.number}"> ${option.letter}. ${option.optionText}</label>
+                            </div>
+                        </c:forEach>
+                            <input type="submit">
+                        </form>
+
 
 
                     </div>
 
-                    <div class="form-group">
-                        <a id="myCompile_${contentLoop}" class="btn btn-primary" href="#" onclick="compile(${contentLoop}); return false" role="button">Run</a>
+                    <div class="row">
+                        <p id="correctAnswer_${question.number}"></p>
                     </div>
 
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3" id="compileResult_${contentLoop}" readonly></textarea>
-                    </div>
-                </c:if>
+                </c:forEach>
 
-                <c:set var = "contentLoop" value = "${contentLoop + 1}"/>
-
-            </c:forEach>
+            <div class="row">
+                <button type="button" onclick="checkAllAnswers()">Check Score</button>
+                <p id="score"></p>
+            </div>
 
         </div>
 
@@ -95,25 +103,6 @@
         $("#wrapper").toggleClass("toggled");
     });
 
-    function compile(sequenceNum) {
-        console.log("hey");
-
-        $.ajaxSetup({
-            contentType:"application/json;charset=utf-8"
-        })
-
-        var thisVar = $("#comment"+ "_" + sequenceNum).next()[0];
-        //debugger;
-        //console.log(thisVar.getValue());
-        //console.log(thisVar.CodeMirror.getValue());
-        $.post( "/compileAndRun/", JSON.stringify({"script":thisVar.CodeMirror.getValue()}))
-            .done(function( data ) {
-                //alert( "Script Loaded: " + data );
-                $('#compileResult' + "_" + sequenceNum).text(data);
-            }, "json");
-
-    }
-
     $( document ).ready(function() {
         console.log( "ready!" );
 
@@ -130,5 +119,42 @@
          */
 
     });
+
+
+    function checkAnswer(number, correctAnswers, explanation) {
+
+        if(correctAnswers != undefined) {
+            var answerKey = correctAnswers.split(",");
+            var answers = [];
+            $.each($("input[name='checkbox_" + number + "']:checked"), function () {
+                answers.push($(this).val());
+            });
+            if (answerKey.length != answers.length) {
+                $("#correctAnswer_" + number).text("Result: Fail, Correct Answers: " + correctAnswers + ", Explanation: " + explanation);
+                $("#correctAnswer_" + number).css("color",'red');
+                return false;
+            }
+
+            for(var i=0; i<answers.length; i++) {
+                if(answerKey[i] != answers[i]){
+                    $("#correctAnswer_" + number).text("Result: Fail, Correct Answers: " + correctAnswers + ", Explanation: " + explanation);
+                    $("#correctAnswer_" + number).css("color",'red');
+                    return false;
+                }
+            }
+
+            $("#correctAnswer_" + number).text("Result: Success, Correct Answers: " + correctAnswers + ", Explanation: " + explanation);
+            $("#correctAnswer_" + number).css("color",'green');
+            return false;
+        }
+
+
+        return false;
+    }
+
+
+    function checkAllAnswers() {
+ 
+    }
 </script>
 <%@ include file="common/footer.jspf"%>

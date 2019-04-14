@@ -81,6 +81,16 @@ public class WelcomeController {
             model.addAttribute("selectedFirstLevelParentId", repository.findById(selectedChapter.getParentChapter()).getParentChapter());
         }
 
+        if (selectedChapter.getNextChapter() != null) {
+            Chapter nextChapter = repository.findById(selectedChapter.getNextChapter());
+            model.addAttribute("nextPage", nextChapter);
+        }
+
+        if (selectedChapter.getPreviousChapter() != null) {
+            Chapter prevChapter = repository.findById(selectedChapter.getPreviousChapter());
+            model.addAttribute("prevPage", prevChapter);
+        }
+
         if(selectedChapter.getPageType() == PageType.LECTURE) {
 
             //List<PageComponent> pageComponentList = fileProcessor.readContentFromTxt(selectedChapter.getFileName());
@@ -89,16 +99,6 @@ public class WelcomeController {
 
 
             model.addAttribute(pageComponentList);
-
-            if (selectedChapter.getNextChapter() != null) {
-                Chapter nextChapter = repository.findById(selectedChapter.getNextChapter());
-                model.addAttribute("nextPage", nextChapter);
-            }
-
-            if (selectedChapter.getPreviousChapter() != null) {
-                Chapter prevChapter = repository.findById(selectedChapter.getPreviousChapter());
-                model.addAttribute("prevPage", prevChapter);
-            }
 
             return "pageTemplate";
 

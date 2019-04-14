@@ -17,6 +17,10 @@ public class Question {
 
     private Answer correctAnswer;
 
+    private String serializedCorrectAnswer;
+
+    private String explanation;
+
     public String getText() {
         return text;
     }
@@ -47,6 +51,7 @@ public class Question {
 
     public void setCorrectAnswer(Answer correctAnswer) {
         this.correctAnswer = correctAnswer;
+        setExplanation(correctAnswer.getExplanation());
     }
 
     public int getNumber() {
@@ -55,5 +60,21 @@ public class Question {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public String getSerializedCorrectAnswer() {
+        return serializedCorrectAnswer;
+    }
+
+    public void setSerializedCorrectAnswer(String serializedCorrectAnswer) {
+        this.serializedCorrectAnswer = serializedCorrectAnswer;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 }
