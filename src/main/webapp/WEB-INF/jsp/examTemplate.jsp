@@ -58,7 +58,13 @@
                 </c:forEach>
 
             <div class="row">
+
                 <button type="button" onclick="checkAllAnswers()">Check Score</button>
+
+            </div>
+
+            <div class="row">
+                
                 <p id="score"></p>
             </div>
 
@@ -123,6 +129,8 @@
 
     function checkAnswer(number, correctAnswers, explanation) {
 
+        $("#score").text("");
+
         if(correctAnswers != undefined) {
             var answerKey = correctAnswers.split(",");
             var answers = [];
@@ -145,16 +153,63 @@
 
             $("#correctAnswer_" + number).text("Result: Success, Correct Answers: " + correctAnswers + ", Explanation: " + explanation);
             $("#correctAnswer_" + number).css("color",'green');
+
             return false;
         }
 
+        return false;
+    }
+
+
+    function checkAnswerReturn(number, correctAnswers, explanation) {
+
+        if(correctAnswers != undefined) {
+            var answerKey = correctAnswers.split(",");
+            var answers = [];
+            $.each($("input[name='checkbox_" + number + "']:checked"), function () {
+                answers.push($(this).val());
+            });
+            if (answerKey.length != answers.length) {
+                $("#correctAnswer_" + number).text("Result: Fail, Correct Answers: " + correctAnswers + ", Explanation: " + explanation);
+                $("#correctAnswer_" + number).css("color",'red');
+                return false;
+            }
+
+            for(var i=0; i<answers.length; i++) {
+                if(answerKey[i] != answers[i]){
+                    $("#correctAnswer_" + number).text("Result: Fail, Correct Answers: " + correctAnswers + ", Explanation: " + explanation);
+                    $("#correctAnswer_" + number).css("color",'red');
+                    return false;
+                }
+            }
+
+            $("#correctAnswer_" + number).text("Result: Success, Correct Answers: " + correctAnswers + ", Explanation: " + explanation);
+            $("#correctAnswer_" + number).css("color",'green');
+
+            return true;
+        }
 
         return false;
     }
 
 
     function checkAllAnswers() {
- 
+
+        var correctCounter = 0;
+
+        var list = ${questionListAsJson};
+
+        list.forEach(function (entry) {
+
+            if(checkAnswerReturn(entry.number, entry.serializedCorrectAnswer,entry.explanation)) {
+                correctCounter++;
+            }
+        });
+
+        console.log(correctCounter);
+
+        $("#score").text("Your score is: " + correctCounter + "/" + list.length);
+
     }
 </script>
 <%@ include file="common/footer.jspf"%>

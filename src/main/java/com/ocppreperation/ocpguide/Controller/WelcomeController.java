@@ -1,5 +1,6 @@
 package com.ocppreperation.ocpguide.Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ocppreperation.ocpguide.Model.PageComponent;
 import com.ocppreperation.ocpguide.Model.PageType;
 import com.ocppreperation.ocpguide.Model.Question;
@@ -104,9 +105,20 @@ public class WelcomeController {
 
         } else {
 
+            ObjectMapper mapper = new ObjectMapper();
+
             List<Question> questionList = fileProcessor.readQuestionsFromXml(selectedChapter.getFileName());
 
             model.addAttribute(questionList);
+
+            String json = "";
+            try {
+                json = mapper.writeValueAsString(questionList);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            model.addAttribute("questionListAsJson", json);
 
             return "examTemplate";
         }
