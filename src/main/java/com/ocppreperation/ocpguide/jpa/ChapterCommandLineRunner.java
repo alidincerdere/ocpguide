@@ -44,7 +44,7 @@ public class ChapterCommandLineRunner implements CommandLineRunner {
 
         //create ContentFiles
         for(Chapter chapter : chapters) {
-            fileProcessor.createContentFileIfNotExist(chapter.getFileName());
+            fileProcessor.createContentFileIfNotExist(chapter.getFileName(), chapter.getPageType());
         }
 
 

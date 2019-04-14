@@ -26,6 +26,7 @@ public class FileProcessor {
 
     public static String INDEX_CSV_FILENAME = "context/index.csv";
     public static String CONTENT_TEMPLATE_FILE_NAME = "context/templateContentFile.xml";
+    public static String EXAM_TEMPLATE_FILE_NAME = "context/templateExamFile.xml";
     public static String CONTENT_DIR = "context/";
 
     public static String DESCRIPTION_START_TAG = "Description Start:";
@@ -329,7 +330,7 @@ public class FileProcessor {
         return pageComponentList;
     }
     */
-    public void createContentFileIfNotExist(String filename) {
+    public void createContentFileIfNotExist(String filename, PageType pageType) {
         try {
 
             //Path currentRelativePath = Paths.get("");
@@ -344,7 +345,12 @@ public class FileProcessor {
 
             if (file.createNewFile()){
 
-                File templateFile =new File(CONTENT_TEMPLATE_FILE_NAME);
+                File templateFile = null;
+                if(pageType == PageType.LECTURE) {
+                    templateFile = new File(CONTENT_TEMPLATE_FILE_NAME);
+                } else {
+                    templateFile = new File(EXAM_TEMPLATE_FILE_NAME);
+                }
 
                 inStream = new FileInputStream(templateFile);
                 outStream = new FileOutputStream(file);

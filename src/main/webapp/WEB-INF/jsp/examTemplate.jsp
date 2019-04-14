@@ -64,7 +64,7 @@
             </div>
 
             <div class="row">
-                
+
                 <p id="score"></p>
             </div>
 
