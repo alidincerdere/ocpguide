@@ -12,6 +12,7 @@ import java.util.UUID;
 /**
  * Created by adere on 18.01.2019.
  */
+
 @Entity
 public class Chapter {
 
