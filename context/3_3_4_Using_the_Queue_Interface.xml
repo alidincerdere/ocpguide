@@ -1,11 +1,39 @@
 <Lecture>
     <Description>
-        Content here!
+        Elements are added and removed in a specific order.
+        - LinkedList is a list and double ended queue. It implements Link and Queue.
+        - ArrayDeque is pure double ended queue.
+
+        Queue methods:
+        - boolean add(E e)  - throws ex
+        - E element() - returns next element - throws ex
+        - boolean offer(E e) - adds element to the end
+        - E remove() - throws ex
+        - void push() - adds to the front
+        - E poll() - removes and returns next element
+        - E peek() - returns next element
+
+
+
+
+        Stack methods:
+        - void push()
+        - E peek()
+        - E pop() - removes and returns next element - throws ex
     </Description><CodeSnipped>
+import java.util.Queue;
+import java.util.ArrayDeque;
+
+
 public class HelloWorld {
     public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+        Queue&lt;Integer&gt; queue = new ArrayDeque&lt;&gt;();
+        System.out.println(queue.offer(10));
+        System.out.println(queue.offer(4));
+        System.out.println(queue.peek());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        System.out.println(queue.peek());
     }
 }
 </CodeSnipped>

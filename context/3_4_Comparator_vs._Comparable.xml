@@ -1,13 +1,9 @@
 <Lecture>
     <Description>
-        Content here!
-    </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
-    }
-}
-</CodeSnipped>
+        - Numbers sort before letters and uppercase letters sort before lowercase letters
+        - interface Comparable
+        - class Comparator
+    </Description>
+
 </Lecture>
 

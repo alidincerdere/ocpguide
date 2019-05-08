@@ -1,13 +1,57 @@
 <Lecture>
     <Description>
-        Content here!
-    </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
-    }
+        - Comparable interface has only one method.
+    </Description>
+    <CodeSnipped>
+/*
+public interface Comparable&lt;T&gt; {
+    public int compareTo(T o);
+}
+*/
+import java.util.*;
+public class Duck implements Comparable&lt;Duck&gt; {
+   private String name;
+   public Duck(String name) {
+        this.name = name;
+   }
+   public String toString() {
+        return name;
+   }
+   public int compareTo(Duck d) {
+        return name.compareTo(d.name);
+   }
+   public static void main(String[] args) {
+        List&lt;Duck&gt; ducks = new ArrayList&lt;&gt;();
+        ducks.add(new Duck("Quack"));
+        ducks.add(new Duck("Puddles"));
+
+        Collections.sort(ducks);
+        System.out.println(ducks);
+   }
 }
 </CodeSnipped>
+    <Description>
+        - compareTo() returns 0 when objects are equal
+        - negative number is returned when current object is smaller than the argument
+        - positive number is returned when current object is greater than the argument
+    </Description>
+    <CodeSnipped>
+import java.util.*;
+public class Animal implements Comparable&lt;Animal&gt; {
+   private int id;
+   public int compareTo(Animal a) {
+      return id - a.id;
+   }
+   public static void main(String[] args) {
+      Animal a1 = new Animal();
+      Animal a2 = new Animal();
+      a1.id = 5;
+      a2.id = 7;
+      System.out.println(a1.compareTo(a2));
+      System.out.println(a1.compareTo(a1));
+      System.out.println(a2.compareTo(a1));
+   }
+}
+    </CodeSnipped>
 </Lecture>
 
