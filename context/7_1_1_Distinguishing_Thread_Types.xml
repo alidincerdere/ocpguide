@@ -1,0 +1,12 @@
+<Lecture>
+    <Description>
+        - All java applications are all multi-threaded, even hello - world !
+        - A System thread
+            - is created by the JVM and runs in the background of application. For ex: Garbage collector
+            - when encounters a problem can't recover and generates java error instead of exception. (for ex: run out of memory)
+        - A user-defined thread
+            - created by app developer to accomplish a specific task
+        - we can consider applications as single threaded when there is only one user-defined thread. So we may omit system threads.
+    </Description>
+</Lecture>
+

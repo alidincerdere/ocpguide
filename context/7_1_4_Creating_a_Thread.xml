@@ -1,0 +1,45 @@
+<Lecture>
+    <Description>
+        Defining a task to be executed by a Thread can be done in 2 ways:
+        - Provide a runnable object or lambda expression two the thread consturctor
+
+    </Description><CodeSnipped>
+public class PrintData implements Runnable {
+    public void run() {
+        for(int i=0; i&lt;3; i++) {
+            System.out.println("Printing data: " + i);
+        }
+    }
+    public static void main(String[] args) {
+
+        (new Thread(new PrintData())).start();
+    }
+}
+</CodeSnipped>
+    <Description>
+        - Create a class that extends thread and override run method
+    </Description><CodeSnipped>
+public class ReadInventoryThread extends Thread {
+    public void run() {
+        System.out.println("Override threads run");
+    }
+    public static void main(String[] args) {
+        (new Thread(new ReadInventoryThread())).start();
+    }
+}
+</CodeSnipped>
+    <Description>
+        - Extending thread is less common
+        - Execution with start() method
+        - Be careful with when start() method is not called
+        - Below examples are not executed on a separate thread. Instead the thread that makes the call will execute the task. So it waits for a run to complete before moving
+        to the next line
+        - - (new PrintData()).run()
+        - - (new Thread(new PrintData()).run()
+        - - (new ReadInventoryThread()).run()
+
+        - In general you should extend thread under very specific circumstances like creating your own priority based thread. Most of the time you should implement
+        Runnable interface.
+    </Description>
+</Lecture>
+

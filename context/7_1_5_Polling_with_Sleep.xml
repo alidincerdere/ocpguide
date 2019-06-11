@@ -1,0 +1,30 @@
+<Lecture>
+    <Description>
+        Polling is the process of intermittently checking data at some fixed interval
+    </Description><CodeSnipped>
+
+    public class CheckResults {
+
+        private static int counter = 0;
+
+        public static void main(String[] args) throws InterruptedException{
+
+            new Thread(() -> {
+
+                for(int i=0; i&lt;500; i++) {
+                    CheckResults.counter++;
+                }
+
+            }).start();
+
+            while (CheckResults.counter&lt;100) {
+                System.out.println("Not Reached yet");
+                Thread.sleep(1000);
+            }
+            System.out.println("Reached");
+        }
+    }
+
+</CodeSnipped>
+</Lecture>
+

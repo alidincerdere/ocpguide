@@ -1,0 +1,26 @@
+<Exam>
+    <Question>
+        <Text>
+            What is the result of the following code?
+        </Text>
+        <Code>
+            public class HelloWorld {
+            public static void main(String[] args) {
+            // Prints "Hello, World" to the terminal window.
+            System.out.println("Hello, World");
+            }
+            }
+        </Code>
+        <Options>
+            <Option>Success</Option>
+            <Option>Failure</Option>
+            <Option>fails to compile.</Option>
+            <Option>Another line of code fails to compile.</Option>
+            <Option>A runtime exception is thrown.</Option>
+        </Options>
+        <Answer>
+            <Explanation>Hello World</Explanation>
+            <CorrectOptions>A</CorrectOptions>
+        </Answer>
+    </Question>
+</Exam>

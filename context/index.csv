@@ -75,3 +75,72 @@ Chapter; Name; PageType
 3.7; Summary;
 3.8; Exam Essentials;
 3.9; Review Questions; EXAM
+4; Functional Programming;
+4.1; Using Variables in Lambdas;
+4.2; Working with Built-in Functional Interfaces;
+4.2.1; Implementing Supplier;
+4.2.2; Implementing Consumer and BiConsumer;
+4.2.3; Implementing Function and BiFunction;
+4.2.4; Implementing UnaryOperator and BinaryOperator;
+4.2.5; Checking Functional Interfaces;
+4.3; Running an Optional;
+4.4; Using Streams;
+4.4.1; Creating Stream Sources;
+4.4.2; Using Common Terminal Operations;
+4.4.3; Using Common Intermediate Operations;
+4.4.4; Putting Together the Pipeline;
+4.4.5; Printing a Stream;
+4.5; Working with Primitives;
+4.5.1; Creating Primitive Streams;
+4.5.2; Using Optional with Primitive Streams;
+4.5.3; Summarizing Statistics;
+4.5.4; Learning the Functional Interfaces for Primitives;
+4.6; Working with Advanced Stream Pipeline Concepts;
+4.6.1; Linking Streams to the Underlying Data;
+4.6.2; Chaining Optionals;
+4.6.3; Collecting Results;
+4.7; Summary;
+4.8; Exam Essentials;
+4.9; Review Questions; EXAM
+7; Concurrency;
+7.1; Introducing Threads;
+7.1.1; Distinguishing Thread Types;
+7.1.2; Understanding Thread Concurrency;
+7.1.3; Introducing Runnable;
+7.1.4; Creating a Thread;
+7.1.5; Polling with Sleep;
+7.2; Creating Threads with the Executor Service;
+7.2.1; Introducing the Single-Thread Executor;
+7.2.2; Shutting down a Thread Executor;
+7.2.3; Submitting Tasks;
+7.2.4; Waiting for Results;
+7.2.5; Scheduling Tasks;
+7.2.6; Increasing Concurrency with Pools;
+7.3; Synchronizing Data Access;
+7.3.1; Protecting Data with Atomic Classes;
+7.3.2; Improving Access with Synchronized Blocks;
+7.3.3; Synchronizing Methods;
+7.3.4; Understanding the Cost of Synchronization;
+7.4; Using Concurrent Collections;
+7.4.1; Introducing Concurrent Collections;
+7.4.2; Understanding Memory Consistency Errors;
+7.4.3; Working with Concurrent Classes;
+7.4.4; Obtaining Synchronized Collections;
+7.5; Working with Parallel Streams;
+7.5.1; Creating Parallel Streams;
+7.5.2; Processing Tasks in Parallel;
+7.5.3; Processing Parallel Reductions;
+7.6; Managing Concurrent Processes;
+7.6.1; Creating a CyclicBarrier;
+7.6.2; Applying the Fork-Join Framework;
+7.7; Identifying Threading Problems;
+7.7.1; Understanding Liveness;
+7.7.2; Managing Race Conditions;
+7.8; Summary;
+7.9; Exam Essentials;
+7.10; Review Questions; EXAM;
+
+
+
+
+

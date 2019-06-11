@@ -1,0 +1,26 @@
+<Lecture>
+    <Description>
+        - The property of executing multiple threads and processes at the same time is referred to as concurrency
+        - when only one cpu, only one thread is running at a given time
+        - for multi core cpu systems there are more and more threads.
+        - Thread scheduler comes into play.
+        - It gives some cpu cycles for each thread to run
+        - when a threads alloted time is finished but its task is not finished yet a contect switch occurs: storing current state of thread. And later restore its state
+        - thread priority - numeric value
+
+        Thread.MIN_PRIORITY      1
+        Thread.NORM_PRIORITY     5
+        Thread.MAX_PRIORITY      10
+
+
+
+    </Description><CodeSnipped>
+public class HelloWorld {
+    public static void main(String[] args) {
+    // Prints "Hello, World" to the terminal window.
+    System.out.println("Hello, World");
+    }
+}
+</CodeSnipped>
+</Lecture>
+

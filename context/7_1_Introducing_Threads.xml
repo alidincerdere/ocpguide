@@ -1,0 +1,10 @@
+<Lecture>
+    <Description>
+        - A thread is the smallest unit of execution that can be scheduled by the operating system
+        - A process is a group of associated threads that execute in the same shared environment.
+        - Shared environment means; threads in the same process share the same memory space and can communicate directly with one another
+        - static variables !
+        - A task is a single unit of work performed by a thread
+    </Description>
+</Lecture>
+

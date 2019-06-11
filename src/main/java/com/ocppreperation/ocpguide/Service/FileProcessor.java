@@ -167,7 +167,12 @@ public class FileProcessor {
                     .parse(in);
 
             for (CSVRecord record : records) {
-                PageType pageType = record.get(2) == null || record.get(2).contentEquals("") ? PageType.LECTURE : PageType.EXAM;
+                PageType pageType;
+                if(record.size()>2) {
+                    pageType = record.get(2) == null || record.get(2).contentEquals("") ? PageType.LECTURE : PageType.EXAM;
+                } else {
+                    pageType = PageType.LECTURE;
+                }
                 chapters.add(new Chapter(record.get(0), record.get(1), pageType));
             }
 
@@ -376,6 +381,7 @@ public class FileProcessor {
             }
 
         } catch (IOException e) {
+            System.out.println("Filename is: " + filename);
             e.printStackTrace();
         }
     }
