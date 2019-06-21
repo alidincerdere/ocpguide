@@ -1,13 +1,10 @@
 <Lecture>
     <Description>
-        Content here!
-    </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
-    }
-}
-</CodeSnipped>
+        There is also sumbit method like execute method of executor service
+        submit() returns a Future object
+        execute does not support Callable
+        submit method is better
+        invokeAll and invokeAny methods run synchronously. These methods will wait until the results are available before returning control to the enclosing program.
+    </Description>
 </Lecture>
 

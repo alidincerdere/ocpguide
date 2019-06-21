@@ -1,13 +1,20 @@
 <Lecture>
     <Description>
-        Content here!
+        We can also use keyword synchronized in the method name as below: So two are same:
     </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+    private void incrementAndReport() {
+        synchronized(this) {
+            System.out.print((++sheepCount)+" ");
+        }
     }
-}
+
+</CodeSnipped><CodeSnipped>
+    private synchronized void incrementAndReport() {
+        System.out.print((++sheepCount)+" ");
+    }
 </CodeSnipped>
+    <Description>
+        It can also be used for static methods.
+    </Description>
 </Lecture>
 

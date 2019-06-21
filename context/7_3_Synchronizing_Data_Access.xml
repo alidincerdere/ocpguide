@@ -1,13 +1,39 @@
 <Lecture>
     <Description>
-        Content here!
+        The unexpected result of two tasks executing at the same time is referred to as a race condition.
+        ++ operator is not thread safe as in example below
     </Description><CodeSnipped>
-public class HelloWorld {
+import java.util.concurrent.*;
+
+public class SheepManager {
+
+    private int sheepCount = 0;
+
+    private void incrementAndReport() {
+        System.out.print((++sheepCount)+" ");
+    }
+
     public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+
+        ExecutorService service = null;
+
+        try {
+
+            service = Executors.newFixedThreadPool(20);
+
+            SheepManager manager = new SheepManager();
+
+            for(int i=0; i&lt;10; i++)
+                service.submit(() -> manager.incrementAndReport());
+        } finally {
+
+            if(service != null) service.shutdown();
+        }
     }
 }
-</CodeSnipped>
+</CodeSnipped> <Description>
+    Numbers 1 to 10 will not be always the output
+    One thread my read 3 and at the same time another one reads 3, so they will both write it as 4.
+</Description>
 </Lecture>
 

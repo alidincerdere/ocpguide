@@ -1,13 +1,115 @@
 <Lecture>
     <Description>
-        Content here!
+        The Future class includes methods that are useful in determining the state of a task:
+        boolean isDone()
+        boolean isCancelled()
+        boolean cancel()
+        V get()
+        V get(long timeout, TimeUnit unit)
     </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+    import java.util.concurrent.*;
+
+    public class CheckResults {
+        private static int counter = 0;
+        public static void main(String[] args) throws InterruptedException, ExecutionException {
+            ExecutorService service = null;
+            try {
+                service = Executors.newSingleThreadExecutor();
+                Future&lt;?&gt; result = service.submit(() -> {
+                    for(int i=0; i&lt;500; i++)
+                    CheckResults.counter++;
+                });
+                result.get(10, TimeUnit.SECONDS);
+                System.out.println("Reached!");
+            } catch (TimeoutException e) {
+                System.out.println("Not reached in time");
+            } finally {
+                if(service != null) service.shutdown();
+            }
+        }
+    }
+</CodeSnipped>
+    <Description>
+        What is the return value of this task? As Future&lt;V&gt; is a generic class, the type V
+        is determined by the return type of the Runnable method. Since the return type of Runnable.run() is void, the get() method always returns null.
+        Essence of Concurrency API: do complex things with threads without using thread class directly
+
+        - Callable is similar to Runnable with the exception that its call() method returns value and can thrown checked exception
+        - Runnable run() method returns void and can not throw checked exception
+        - Unlike Runnable the get() method always return null, for Callable get() method of Future object return some value
+    </Description><CodeSnipped>
+import java.util.concurrent.*;
+
+public class AddData {
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+
+       ExecutorService service = null;
+
+        try {
+
+            service = Executors.newSingleThreadExecutor();
+
+            Future&lt;Integer&gt; future = service.submit(() -> 30 + 11);
+
+            System.out.println(future.get());
+
+        } finally {
+
+            if (service != null)
+                service.shutdown();
+        }
+
     }
 }
+
+</CodeSnipped>
+    <Description>
+        - Callable is preferred over Runnable
+        - In above example the result can also be obtained using Runnable by writing the result to a static variable for instance
+
+        service.submit(() -> {Thread.sleep(1000); return null;}); //compiles
+        service.submit(() -> {Thread.sleep(1000);}); //does not compile
+
+        because first line is Callable and it can throw exception, the second line however is Runnable and Thread.sleep may throw a checked InterruptedException
+
+        Waiting for all tasks to finish:
+
+    </Description><CodeSnipped>
+
+import java.util.concurrent.*;
+
+public class allTasksFinish {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        ExecutorService service = null;
+
+        try {
+
+            service = Executors.newSingleThreadExecutor();
+
+            //add tasks to tne service
+
+        } finally {
+
+            if(service != null)
+                service.shutdown();
+        }
+
+        if(service != null) {
+
+
+            service.awaitTermination(1, TimeUnit.MINUTES);
+
+            if (service.isTerminated())
+                System.out.println("All tasks finished !");
+            else
+                System.out.println("At least one task remains");
+        }
+    }
+}
+
 </CodeSnipped>
 </Lecture>
 

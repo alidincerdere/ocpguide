@@ -1,11 +1,52 @@
 <Lecture>
     <Description>
-        Content here!
+        Why we need this ? We can use synchronized for a MAP collection as below:
     </Description><CodeSnipped>
-public class HelloWorld {
+import java.util.*;
+public class ZooManager {
+
+    private Map&lt;String,Object> foodData = new HashMap&lt;String,Object>();
+
+    public synchronized void put(String key, String value) {
+
+        foodData.put(key, value);
+
+    }
+
+    public synchronized Object get(String key) {
+
+        return foodData.get(key);
+    }
     public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+    }
+
+}
+</CodeSnipped>
+    <Description>
+        In fact, the concurrent collections often include performance enhancements that avoid unnecessary synchronization.
+
+        This is the alternative way:
+
+    </Description><CodeSnipped>
+import java.util.*;
+import java.util.concurrent.*;
+
+public class ZooManager {
+
+    private Map&lt;String,Object> foodData = new ConcurrentHashMap&lt;String,Object>();
+
+    public void put(String key, String value) {
+
+        foodData.put(key, value);
+    }
+
+    public  Object get(String key) {
+
+        return foodData.get(key);
+    }
+
+    public static void main(String[] args) {
+
     }
 }
 </CodeSnipped>

@@ -1,13 +1,8 @@
 <Lecture>
     <Description>
-        Content here!
-    </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
-    }
-}
-</CodeSnipped>
+        One of the most powerful features of the Streams API is that it has built-in concurrency support. Up until now, all of the streams with which you have worked have been serial streams. A serial stream is a stream in which the results are ordered, with only one entry being processed at a time.
+        A parallel stream is a stream that is capable of processing results concurrently, using multiple threads. For example, you can use a parallel stream and the stream map() method to operate concurrently on the elements in the stream, vastly improving performance over processing a single element at a time.
+        By default, the number of threads available in a parallel stream is related to the number of available CPUs in your environment. In order to increase the thread count, you would need to create your own custom class.
+    </Description>
 </Lecture>
 

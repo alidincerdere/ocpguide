@@ -1,13 +1,40 @@
 <Lecture>
     <Description>
-        Content here!
+        Atomic is the property of an operation to be carried out as a single unit of execution without any interference by another thread.
     </Description><CodeSnipped>
-public class HelloWorld {
+import java.util.concurrent.*;
+
+import java.util.concurrent.atomic.*;
+
+public class SheepManager {
+
+    private AtomicInteger sheepCount = new AtomicInteger(0);
+
+    private void incrementAndReport() {
+
+        System.out.print(sheepCount.incrementAndGet()+" ");
+    }
+
     public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+
+        ExecutorService service = null;
+
+        try {
+
+            service = Executors.newFixedThreadPool(20);
+
+            SheepManager manager = new SheepManager();
+
+            for(int i=0; i&lt;10; i++)
+                service.submit(() -> manager.incrementAndReport());
+        } finally {
+
+            if(service != null) service.shutdown();
+        }
     }
 }
-</CodeSnipped>
+</CodeSnipped><Description>
+    Now the numbers from 1 to 10 will always be the output. But the numbers may not be ordered.
+</Description>
 </Lecture>
 

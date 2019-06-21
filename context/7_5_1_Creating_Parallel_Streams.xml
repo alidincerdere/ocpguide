@@ -1,13 +1,45 @@
 <Lecture>
     <Description>
-        Content here!
+        There are two ways:
+
+        First: stream's parallel() method:
     </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+
+    import java.util.*;
+    import java.util.concurrent.*;
+    import java.util.stream.*;
+
+    public class Parallelization {
+
+        public static void main(String[] args) {
+
+            Stream&lt;Integer> stream = Arrays.asList(1,2,3,4,5,6).stream();
+
+            Stream&lt;Integer> parallelStream = stream.parallel();
+
+            parallelStream.forEach(s -> System.out.println(s + " "));
+        }
+
     }
-}
+</CodeSnipped>
+    <Description>
+        The second way to create a parallel stream is from a Java collection class.
+    </Description><CodeSnipped>
+    import java.util.*;
+    import java.util.concurrent.*;
+    import java.util.stream.*;
+
+    public class Parallelization {
+
+        public static void main(String[] args) {
+
+            Stream&lt;Integer> parallelStream2 = Arrays.asList(1,2,3,4,5,6).parallelStream();
+
+            parallelStream2.forEach(s -> System.out.println(s + " "));
+
+        }
+
+    }
 </CodeSnipped>
 </Lecture>
 

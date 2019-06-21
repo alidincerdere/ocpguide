@@ -1,13 +1,23 @@
 <Lecture>
     <Description>
-        Content here!
-    </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
-    }
-}
-</CodeSnipped>
+        newCachedThreadPool()
+
+        - Creates a thread pool that creates new threads as needed, but will reuse previously constructed threads when they are available.
+
+        newFixedThreadPool(int nThreads)
+
+        - Creates a thread pool that reuses a fixed number of threads operating off a shared unbounded queue.
+
+        newScheduledThreadPool(int nThreads)
+
+        - Creates a thread pool that can schedule commands to run after a given delay or to execute periodically.
+
+
+        While a single-thread executor will wait for an available thread to become available before running the next task, a pooled-thread executor can execute the next task concurrently.
+        If the pool runs out of available threads, the task will be queued by the thread executor and wait to be completed.
+
+
+        newCachedThreadPool() is used for short-lived async tasks. It is discouraged for long lived processes. There might be too many threads after some time
+    </Description>
 </Lecture>
 

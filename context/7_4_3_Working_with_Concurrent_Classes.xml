@@ -1,12 +1,103 @@
 <Lecture>
     <Description>
-        Content here!
+        You should use a concurrent collection class anytime that you are going to have multiple threads modify a collections object outside a synchronized block or method, even if you don’t expect a concurrency problem.
+        On the other hand, if all of the threads are accessing an established immutable or read-only collection, a concurrent collection class is not required.
+        It is a good practice to instantiate a concurrent collection but pass it around using a non-concurrent interface whenever possible.
+
+        ConcurrentHashMap       --> ConcurrentMap
+        ConcurrentLinkedDeque   --> Deque
+        ConcurrentLinkedQueue   --> Queue
+        ConcurrentSkipListMap   --> ConcurrentMap, SortedMap, NavigableMap
+        ConcurrentSkipListSet   --> SortedSet, NavigableSet
+        CopyOnWriteArrayList    --> List
+        CopyOnWriteArraySet     --> Set
+        LinkedBlockingDeque     --> BlockingQueue, BlockingDeque
+        LinkedBlockingQueue     --> BlockingQueue
+    </Description>
+    <Description>
+        Understanding BlockingQueues:
+
+        offer(E e, long timeout, TimeUnit unit) : Adds item to the queue waiting the specified time, returning false if time elapses before space is available
+
+        poll(long timeout, TimeUnit unit): Retrieves and removes an item from the queue, waiting the specified time, returning null if the time elapses before the item is available
     </Description><CodeSnipped>
-public class HelloWorld {
+import java.util.*;
+import java.util.concurrent.*;
+
+public class MyBlocking {
+
     public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+
+        try {
+            BlockingQueue&lt;Integer> blockingQueue = new LinkedBlockingQueue&lt;>();
+            blockingQueue.offer(39);
+            blockingQueue.offer(3, 4, TimeUnit.SECONDS);
+            System.out.println(blockingQueue.poll());
+            System.out.println(blockingQueue.poll(10, TimeUnit.MILLISECONDS));
+        } catch (InterruptedException e) {
+            // Handle interruption
+            System.out.println("exception");
+        }
     }
+}
+
+</CodeSnipped>
+    <Description>
+        LinkedBlockingDeque class maintains a doubly linked list between elements and implements a BlockingDeque interface.
+
+        offerFirst(E e, long timeout, TimeUnit unit)
+        offerLast(E e, long timeout, TimeUnit unit)
+        pollFirst(long timeout, TimeUnit unit)
+        pollLast(long timeout, TimeUnit unit)
+    </Description><CodeSnipped>
+import java.util.*;
+import java.util.concurrent.*;
+
+public class MyBlocking {
+
+    public static void main(String[] args) {
+
+        try {
+            BlockingDeque&lt;Integer> blockingDeque = new LinkedBlockingDeque&lt;>();
+            blockingDeque.offer(91);
+            blockingDeque.offerFirst(5, 2, TimeUnit.MINUTES);
+            blockingDeque.offerLast(47, 100, TimeUnit.MICROSECONDS);
+            blockingDeque.offer(3, 4, TimeUnit.SECONDS);
+
+            System.out.println(blockingDeque.poll());
+            System.out.println(blockingDeque.poll(950, TimeUnit.MILLISECONDS));
+            System.out.println(blockingDeque.pollFirst(200, TimeUnit.NANOSECONDS));
+            System.out.println(blockingDeque.pollLast(1, TimeUnit.SECONDS));
+
+        } catch (InterruptedException e) {
+            // Handle interruption
+            System.out.println("Exception");
+        }
+    }
+}
+</CodeSnipped>
+    <Description>
+        The SkipList classes, ConcurrentSkipListSet and ConcurrentSkipListMap, are con- current versions of their sorted counterparts, TreeSet and TreeMap, respectively.
+
+        CopyOnWriteArrayList :
+    </Description><CodeSnipped>
+import java.util.*;
+import java.util.concurrent.*;
+
+public class MyCopyOnWrite {
+
+    public static void main(String[] args) {
+
+        List&lt;Integer> list = new CopyOnWriteArrayList&lt;>(Arrays.asList(4,3,52));
+
+        for(Integer item: list) {
+            System.out.print(item+" ");
+            list.add(9);
+        }
+        System.out.println();
+        System.out.println("Size: "+list.size());
+    }
+
 }
 </CodeSnipped>
 </Lecture>

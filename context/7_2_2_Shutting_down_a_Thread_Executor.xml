@@ -1,13 +1,18 @@
 <Lecture>
     <Description>
-        Content here!
-    </Description><CodeSnipped>
-public class HelloWorld {
-    public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
-    }
-}
-</CodeSnipped>
+        It is important to call shutdown method
+        A thread executor returns a non-deamon thread. So if we do not shutdown than our app will never terminate
+        When we call shutdown method:
+        - firstly executor will not accept any new tasks
+        - it will complete ongoing/previously submitted tasks.
+        - In this case isShutdown method will return true but isTerminated will return false
+        - If a new task is submitted in this case: a RejectedExecutionException will be thrown
+        - when all tasks are done, the executor will terminage and both methods above will return true
+
+        shutdown method does not actually stop any tasks which are already submitted to the executor.
+        For this reason there is shutdownNow method. It tries to attempts running tasks and ignores already submitted ones
+        It returns a List&lt;Runnable&gt; including tasks that are not executed
+
+    </Description>
 </Lecture>
 

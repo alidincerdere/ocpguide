@@ -1,13 +1,55 @@
 <Lecture>
     <Description>
-        Content here!
+        Like ExecutorService we use ScheduledExecutorService
     </Description><CodeSnipped>
-public class HelloWorld {
+
+import java.util.concurrent.*;
+
+public class myClass {
+
     public static void main(String[] args) {
-    // Prints "Hello, World" to the terminal window.
-    System.out.println("Hello, World");
+
+        ScheduledExecutorService service = null;
+
+        try {
+
+            service = Executors.newSingleThreadScheduledExecutor();
+
+            Runnable task1 = () -> System.out.println("at runnable");
+
+            Callable&lt;String&gt; task2 = () -> "Monkey";
+
+            Future&lt;?&gt; result1 = service.schedule(task1, 2, TimeUnit.SECONDS);
+
+            Future&lt;?&gt; result2 = service.schedule(task2, 10, TimeUnit.SECONDS);
+
+            //String myString = result2.get(15, Timeout.SECONDS);
+            //System.out.println(myString);
+
+
+
+        } finally {
+
+            if (service != null)
+                service.shutdown();
+        }
     }
+
 }
 </CodeSnipped>
+    <Description>
+        scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)
+
+        - Creates and executes a Runnable task after the given initial delay, creating a new task every period value that passes.
+
+
+        scheduleAtFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit)
+
+        - Creates and executes a Runnable task after the given initial delay and subsequently with the given delay between the termination of one execution and the com- mencement of the next
+
+        Later one creates a new task after the previous task has finished.
+
+        They do not take callable objects as parameters
+    </Description>
 </Lecture>
 
